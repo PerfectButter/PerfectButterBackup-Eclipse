@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">Perfect Butter Backup</string>
-    <string name="title_section3">ROM Options</string>
-    <string name="title_section2">Restore</string>
-    <string name="title_section1">Backup</string>
+    <string name="title_section3">Restore</string>
+    <string name="title_section2">Backup</string>
+    <string name="title_section1">ROM Options</string>
     <string name="menu_settings">Settings</string>
+    <string name="backup_tab_activity_header_string">Backup Manager</string>
 
 </resources>
