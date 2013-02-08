@@ -1,9 +1,12 @@
 package com.app.perfectbutterbackup;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +19,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
 {
@@ -37,6 +41,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
+		askRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -96,6 +101,56 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) 
 	{
 		
+	}
+	
+	/*
+	 * Method called to toast messages
+	 */
+	public void toastMessage(String message) {
+		Context context = getApplicationContext();
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, message, duration);
+		toast.show();
+		
+	}
+	
+	/*
+	 * Will prompt to ask for Root access so we can access system files
+	 * We can actually just run p = Runtime.getRuntime().exec("su");
+	 * This just toasts messages to test
+	 */
+	public void askRoot() {
+	Process p;
+	try {
+	   // Preform su to get root privledges
+	   p = Runtime.getRuntime().exec("su"); 
+
+	   // Attempt to write a file to a root-only
+	   DataOutputStream os = new DataOutputStream(p.getOutputStream());
+	   os.writeBytes("echo \"Do I have root?\" >/sdcard/temporary.txt\n");
+
+	   // Close the terminal
+	   os.writeBytes("exit\n");
+	   os.flush();
+	   try {
+	      p.waitFor();
+	           if (p.exitValue() != 255) {
+	        	  // TODO Code to run on success
+	              toastMessage("root");
+	           }
+	           else {
+	        	   // TODO Code to run on unsuccessful
+	        	   toastMessage("not root");
+	           }
+	   } catch (InterruptedException e) {
+	      // TODO Code to run in interrupted exception
+		   toastMessage("not root");
+	   }
+	} catch (IOException e) {
+	   // TODO Code to run in input/output exception
+		toastMessage("not root");
+	}
 	}
 
 	/**
@@ -192,5 +247,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return textView;
 		}
 	}
-
 }
