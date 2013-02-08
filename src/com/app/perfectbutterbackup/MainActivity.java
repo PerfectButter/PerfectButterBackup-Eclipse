@@ -115,19 +115,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			if(position==0) // the 0th tab in array indexes, or 1st tab in human indexes
+			if(position==1) // the 0th tab in array indexes, or 1st tab in human indexes
 			{
 				BackupTabFragment btf = new BackupTabFragment();
 				Fragment f = (Fragment) btf;
 				return f;
 			}
-			else if(position==1)
+			else if(position==2)
 			{
 				RestoreTabFragment rtf = new RestoreTabFragment();
 				Fragment f = (Fragment) rtf;
 				return f;				
 			}
-			else if(position==2)
+			else if(position==0)
 			{
 				ROMControlFragment rcf = new ROMControlFragment();
 				Fragment f = (Fragment) rcf;

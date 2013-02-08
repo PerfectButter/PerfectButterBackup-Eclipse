@@ -1,5 +1,5 @@
 package com.app.perfectbutterbackup;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 
 // for any functionality that's needed for the backup tab
-public class ROMControlFragment extends ListFragment
+public class ROMControlFragment extends Fragment
 {
 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
 	public ROMControlFragment()
 	{
-			
+		
 	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
