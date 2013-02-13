@@ -1,9 +1,7 @@
 package com.app.perfectbutterbackup;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
-
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;

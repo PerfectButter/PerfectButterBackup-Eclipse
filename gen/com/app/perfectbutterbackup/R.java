@@ -18,12 +18,30 @@ public final class R {
     }
     public static final class id {
         public static final int appsettingsactivitylayout=0x7f080001;
+        public static final int backupAppDataCheckBox=0x7f08000a;
+        public static final int backupAppHeaderTextView=0x7f080007;
+        public static final int backupAppHorizontalBar=0x7f080008;
+        public static final int backupAppsCheckBox=0x7f080009;
+        public static final int backupLocationDropboxRadioButton=0x7f080011;
+        public static final int backupLocationEmailRadioButton=0x7f08000f;
+        public static final int backupLocationHeaderTextView=0x7f08000c;
+        public static final int backupLocationHorizontalBar=0x7f08000d;
+        public static final int backupLocationRadioGroup=0x7f08000e;
+        public static final int backupLocationSDCardRadioButton=0x7f080010;
+        public static final int backupPhoneHeaderTextView=0x7f080004;
+        public static final int backupPhoneHorizontalBar=0x7f080003;
+        public static final int backupPhoneLogCheckBox=0x7f080006;
+        public static final int backupTextMessagesCheckBox=0x7f080005;
         public static final int backuptabfragmentlayout=0x7f080002;
-        public static final int menu_settings=0x7f080006;
+        public static final int button1=0x7f080015;
+        public static final int button2=0x7f080014;
+        public static final int editText1=0x7f080013;
+        public static final int editText2=0x7f080016;
+        public static final int menu_settings=0x7f080018;
         public static final int pager=0x7f080000;
-        public static final int restoretabfragmentlayout=0x7f080004;
-        public static final int romcontrolfragmentlayout=0x7f080005;
-        public static final int textView1=0x7f080003;
+        public static final int restoretabfragmentlayout=0x7f080012;
+        public static final int romcontrolfragmentlayout=0x7f080017;
+        public static final int runBackupButton=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -38,7 +56,34 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int backup_tab_activity_header_string=0x7f050005;
+        public static final int backup_tab_app_data=0x7f05000b;
+        /**  Header strings 
+         */
+        public static final int backup_tab_app_header=0x7f050009;
+        /**  Phone app strings 
+         */
+        public static final int backup_tab_apps=0x7f05000a;
+        /**  Header strings  
+         */
+        public static final int backup_tab_backup_location_header=0x7f05000c;
+        public static final int backup_tab_dropbox=0x7f05000e;
+        /**  Backup location strings 
+         */
+        public static final int backup_tab_email=0x7f05000d;
+        /**  Backup Tab Strings 
+ Header strings 
+         */
+        public static final int backup_tab_phone_header=0x7f050006;
+        public static final int backup_tab_phone_log=0x7f050008;
+        public static final int backup_tab_run_backup=0x7f050010;
+        public static final int backup_tab_sd_card=0x7f05000f;
+        /**  Phone data strings 
+         */
+        public static final int backup_tab_text_messages=0x7f050007;
         public static final int menu_settings=0x7f050004;
+        /**  Restore Tab Strings 
+         */
+        public static final int restore_tab_select_location=0x7f050011;
         public static final int title_section1=0x7f050003;
         public static final int title_section2=0x7f050002;
         public static final int title_section3=0x7f050001;

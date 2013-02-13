@@ -5,24 +5,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BackupTabActivity" >
+    
+    	<View
+	    android:id="@+id/backupPhoneHorizontalBar"
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dip"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/backupPhoneHeaderTextView"
+	    android:background="#323232" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <CheckBox
+        android:id="@+id/backupTextMessagesCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/backup_tab_activity_header_string"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/main_text_header_size" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupPhoneHorizontalBar"
+        android:text="@string/backup_tab_text_messages" />
+
+    <CheckBox
+        android:id="@+id/backupPhoneLogCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupTextMessagesCheckBox"
+        android:text="@string/backup_tab_phone_log" />
+
+    <TextView
+        android:id="@+id/backupAppHeaderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupPhoneLogCheckBox"
+        android:layout_marginTop="45dp"
+        android:text="@string/backup_tab_app_header"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <View
+        android:id="@+id/backupAppHorizontalBar"
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="6dp"
-        android:background="#323232"
-         />
+        android:layout_below="@+id/backupAppHeaderTextView"
+        android:background="#323232" />
+
+    <CheckBox
+        android:id="@+id/backupAppsCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupAppHorizontalBar"
+        android:text="@string/backup_tab_apps" />
+
+    <CheckBox
+        android:id="@+id/backupAppDataCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupAppsCheckBox"
+        android:text="@string/backup_tab_app_data" />
+
+    <Button
+        android:id="@+id/runBackupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/backup_tab_run_backup" />
+
+    <TextView
+        android:id="@+id/backupLocationHeaderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/backupAppDataCheckBox"
+        android:layout_marginTop="45dp"
+        android:text="@string/backup_tab_backup_location_header"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/backupLocationHorizontalBar"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_alignBottom="@+id/backupLocationHeaderTextView"
+        android:layout_alignParentLeft="true"
+        android:background="#323232" />
+
+    <TextView
+        android:id="@+id/backupPhoneHeaderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/backup_tab_phone_header"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<RadioGroup
+	    android:id="@+id/backupLocationRadioGroup"
+	    android:orientation="horizontal"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/backupLocationHeaderTextView" >
+
+	    <RadioButton
+	        android:id="@+id/backupLocationEmailRadioButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/backup_tab_email" />
+
+	    <RadioButton
+	        android:id="@+id/backupLocationSDCardRadioButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:checked="true"
+	        android:text="@string/backup_tab_sd_card" />
+
+	    <RadioButton
+	        android:id="@+id/backupLocationDropboxRadioButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/backup_tab_dropbox" />
+	</RadioGroup>
+
+
 
 </RelativeLayout>
