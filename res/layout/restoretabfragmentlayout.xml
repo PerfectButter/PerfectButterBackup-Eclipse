@@ -4,17 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/restoreTabHeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -22,35 +13,33 @@
         android:text="@string/restore_tab_header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editText1"
+    <Button
+        android:id="@+id/restoreTabChooseFileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText2"
-        android:ems="10"
-        android:hint="@string/restore_tab_select_file_hint"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_below="@+id/restoreTabFilePathTextBox"
+        android:text="@string/restore_tab_choose_file_button" 
+        android:onClick="launchFileChooser"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/restoreTabRunRestoreButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText1"
-        android:text="@string/restore_tab_choose_file_button" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
+        android:layout_alignBaseline="@+id/restoreTabChooseFileButton"
+        android:layout_alignBottom="@+id/restoreTabChooseFileButton"
         android:layout_alignParentRight="true"
         android:text="@string/restore_tab_run_restore_button" />
+
+    <EditText
+        android:id="@+id/restoreTabFilePathTextBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/restoreTabHeaderText"
+        android:ems="10"
+        android:hint="@string/restore_tab_select_file_hint"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

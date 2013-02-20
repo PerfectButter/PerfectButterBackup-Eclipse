@@ -1,11 +1,19 @@
 package com.app.perfectbutterbackup;
+import group.pals.android.lib.ui.filechooser.FileChooserActivity;
+import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
+import group.pals.android.lib.ui.filechooser.services.IFileProvider;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,11 +24,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
 {
+	private static final int _ReqChooseFile = 0;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -118,37 +129,55 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 * We can actually just run p = Runtime.getRuntime().exec("su");
 	 * This just toasts messages to test
 	 */
-	public void askRoot() {
-	Process p;
-	try {
-	   // Preform su to get root privledges
-	   p = Runtime.getRuntime().exec("su"); 
-
-	   // Attempt to write a file to a root-only
-	   DataOutputStream os = new DataOutputStream(p.getOutputStream());
-	   os.writeBytes("echo \"Do I have root?\" >/sdcard/temporary.txt\n");
-
-	   // Close the terminal
-	   os.writeBytes("exit\n");
-	   os.flush();
-	   try {
-	      p.waitFor();
-	           if (p.exitValue() != 255) {
-	        	  // TODO Code to run on success
-	              toastMessage("root");
-	           }
-	           else {
-	        	   // TODO Code to run on unsuccessful
-	        	   toastMessage("not root");
-	           }
-	   } catch (InterruptedException e) {
-	      // TODO Code to run in interrupted exception
-		   toastMessage("not root");
-	   }
-	} catch (IOException e) {
-	   // TODO Code to run in input/output exception
-		toastMessage("not root");
+	public void askRoot() 
+	{
+		Process p;
+		try {
+		   // Preform su to get root privledges
+		   p = Runtime.getRuntime().exec("su"); 
+	
+		   // Attempt to write a file to a root-only
+		   DataOutputStream os = new DataOutputStream(p.getOutputStream());
+		   os.writeBytes("echo \"Do I have root?\" >/sdcard/temporary.txt\n");
+	
+		   // Close the terminal
+		   os.writeBytes("exit\n");
+		   os.flush();
+		   try {
+		      p.waitFor();
+		           if (p.exitValue() != 255) {
+		        	  // TODO Code to run on success
+		              toastMessage("root");
+		           }
+		           else {
+		        	   // TODO Code to run on unsuccessful
+		        	   toastMessage("not root");
+		           }
+		   } catch (InterruptedException e) {
+		      // TODO Code to run in interrupted exception
+			   toastMessage("not root");
+		   }
+		} catch (IOException e) 
+		{
+		   // TODO Code to run in input/output exception
+			toastMessage("not root");
+		}
 	}
+	
+	public void launchFileChooser(View v)
+	{
+		final Activity currentActivity = this;
+
+		Intent intent = new Intent(currentActivity, FileChooserActivity.class);
+		/*
+		 * by default, if not specified, default rootpath is sdcard,
+		 * if sdcard is not available, "/" will be used
+		 */
+		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
+		startActivityForResult(intent, _ReqChooseFile);	
+	    IFileProvider.FilterMode filterMode = (IFileProvider.FilterMode) intent.getSerializableExtra(FileChooserActivity._FilterMode);
+	    boolean saveDialog = intent.getBooleanExtra(FileChooserActivity._SaveDialog, false);
+	    List<LocalFile> files = (List<LocalFile>) intent.getSerializableExtra(FileChooserActivity._Results);
 	}
 
 	/**

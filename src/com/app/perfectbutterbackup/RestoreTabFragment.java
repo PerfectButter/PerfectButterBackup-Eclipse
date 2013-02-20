@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 // for any functionality that's needed for the backup tab
 public class RestoreTabFragment extends Fragment
-{
+{	
 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
 	public RestoreTabFragment()
 	{
