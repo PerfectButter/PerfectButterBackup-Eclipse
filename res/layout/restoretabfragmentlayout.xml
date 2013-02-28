@@ -40,6 +40,6 @@
         android:layout_below="@+id/restoreTabHeaderText"
         android:ems="10"
         android:hint="@string/restore_tab_select_file_hint"
-        android:inputType="textMultiLine" />
+        android:inputType="none" />
 
 </RelativeLayout>

@@ -26,7 +26,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
@@ -50,7 +52,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		askRoot();
+		//askRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -178,6 +180,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    IFileProvider.FilterMode filterMode = (IFileProvider.FilterMode) intent.getSerializableExtra(FileChooserActivity._FilterMode);
 	    boolean saveDialog = intent.getBooleanExtra(FileChooserActivity._SaveDialog, false);
 	    List<LocalFile> files = (List<LocalFile>) intent.getSerializableExtra(FileChooserActivity._Results);
+	    System.out.println("hi");
+	    EditText editTextBox = (EditText) this.findViewById(R.id.restoreTabFilePathTextBox);
+	    editTextBox.setText(files.get(0).getAbsolutePath(), BufferType.SPANNABLE);
 	}
 
 	/**
