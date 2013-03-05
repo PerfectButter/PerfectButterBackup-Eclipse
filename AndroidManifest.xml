@@ -4,10 +4,11 @@
     android:versionCode="1"
     android:versionName="1.0" >
     
-    <!-- android file chooser -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <original-package android:name="com.app.perfectbutterbackup"  />
     
-    <!--  end android file chooser -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -44,7 +45,7 @@
             android:label="app settings">
             
         </activity>
-
+        
     </application>
 
 </manifest>

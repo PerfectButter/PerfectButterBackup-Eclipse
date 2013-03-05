@@ -22,7 +22,7 @@
         android:background="#323232" />
 
     <RadioGroup
-        android:id="@+id/radioGroup1"
+        android:id="@+id/kernel_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -30,34 +30,24 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/radio0"
+            android:id="@+id/kernel_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="Battery" />
 
         <RadioButton
-            android:id="@+id/radio1"
+            android:id="@+id/kernel_stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stock" />
 
         <RadioButton
-            android:id="@+id/radio2"
+            android:id="@+id/kernel_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Performance" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/radioGroup1"
-        android:layout_marginTop="45dp"
-        android:text="UI Options"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <View
         android:id="@+id/View01"
@@ -110,7 +100,7 @@
         android:background="#323232" />
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/navigation_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -118,23 +108,36 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/radio0"
+            android:id="@+id/navigation_bar_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Small" />
+            android:text="Small" 
+            android:onClick="onRadioButtonClicked"  />
 
         <RadioButton
-            android:id="@+id/radio1"
+            android:id="@+id/navigation_bar_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium" />
+            android:text="Medium" 
+            android:onClick="onRadioButtonClicked"  />
 
         <RadioButton
-            android:id="@+id/radio2"
+            android:id="@+id/navigation_bar_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large" />
+            android:text="Large" 
+            android:onClick="onRadioButtonClicked"  />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/kernel_options"
+        android:layout_marginTop="29dp"
+        android:text="UI Options"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

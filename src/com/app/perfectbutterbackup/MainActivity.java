@@ -19,6 +19,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +27,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.EditText;
+=======
+import android.widget.RadioButton;
+>>>>>>> Added on RadioButtonClicked listeners
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -34,6 +39,10 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
 {
 	private static final int _ReqChooseFile = 0;
+	private FragmentActivity fa;
+	private final static String TAG = "TestActivity";
+
+
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -184,7 +193,36 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    EditText editTextBox = (EditText) this.findViewById(R.id.restoreTabFilePathTextBox);
 	    editTextBox.setText(files.get(0).getAbsolutePath(), BufferType.SPANNABLE);
 	}
+	
+	public void onRadioButtonClicked(View view) {
+      // Is the button now checked?
+      boolean checked = ((RadioButton) view).isChecked();
 
+      // Check which radio button was clicked
+      switch (view.getId()) {
+        case R.id.navigation_bar_small:
+          if (checked) {
+            Log.i(TAG, "Small navigation selected");
+            toastMessage("Small navigation Selected");
+          }
+          break;
+          
+          case R.id.navigation_bar_medium:
+          if (checked) {
+            Log.i(TAG, "Medium navigation selected");
+            toastMessage("Medium Navigation selected");
+          }
+          case R.id.navigation_bar_large:
+          if (checked) {
+            Log.i(TAG, "Large navigation selected");
+            toastMessage("Large Navigation selected");
+          }
+          break;
+    
+      }
+  }
+	
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -279,4 +317,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return textView;
 		}
 	}
+	
+	
+	
 }
