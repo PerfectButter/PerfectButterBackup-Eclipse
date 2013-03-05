@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/backupPhoneHorizontalBar"
+        android:checked="true"
         android:text="@string/backup_tab_text_messages" />
 
     <CheckBox
@@ -28,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/backupTextMessagesCheckBox"
+        android:checked="true"
         android:text="@string/backup_tab_phone_log" />
 
     <TextView
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/backupAppHorizontalBar"
+        android:checked="true"
         android:text="@string/backup_tab_apps" />
 
     <CheckBox
@@ -62,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/backupAppsCheckBox"
+        android:checked="true"
         android:text="@string/backup_tab_app_data" />
 
     <Button

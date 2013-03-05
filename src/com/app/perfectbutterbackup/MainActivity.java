@@ -9,11 +9,15 @@ import java.util.List;
 import java.util.Locale;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -61,7 +65,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		//askRoot();
+		askRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -175,6 +179,41 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		}
 	}
 	
+	
+	public void rebootPhone(View v)
+	{
+		Builder userConfirmation = new AlertDialog.Builder(this);
+        userConfirmation.setIcon(android.R.drawable.ic_dialog_alert);
+        userConfirmation.setTitle("Closing Activity");
+        userConfirmation.setMessage("Are you sure you want to close this activity?");
+        userConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+        	public void onClick(DialogInterface dialog, int which) 
+        	{ 
+        		finish();
+    			try{
+    				Runtime.getRuntime().exec(new String[]{"/system/bin/su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {} 
+		  		
+		  		try{
+		  			  Runtime.getRuntime().exec(new String[]{"/system/xbin/su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {}
+  		
+		  		try{
+		  			  Runtime.getRuntime().exec(new String[]{"su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {}
+        	} });
+        userConfirmation.setNegativeButton("No", null);
+        userConfirmation.show();
+	}
+	
+	
+	/*
+	 * The onclick listener for the 'choose file' button in the restoretabfragmentlayout.xml
+	 */
 	public void launchFileChooser(View v)
 	{
 		final Activity currentActivity = this;
@@ -229,7 +268,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter 
 	{
-
 		public SectionsPagerAdapter(FragmentManager fm) 
 		{
 			super(fm);
@@ -252,19 +290,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				Fragment f = (Fragment) rtf;
 				return f;				
 			}
-			else if(position==0)
+//			else if(position==0)
+//			{
+//		
+//			}
+			else
 			{
 				ROMControlFragment rcf = new ROMControlFragment();
 				Fragment f = (Fragment) rcf;
-				return f;			
-			}
-			else
-			{
-				Fragment fragment = new DummySectionFragment();
-				Bundle args = new Bundle();
-				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				return fragment;
+				return f;	
 			}
 		}
 
@@ -289,6 +323,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return null;
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
@@ -321,3 +356,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	
 	
 }
+=======
+}
+>>>>>>> added reboot and check boxes default checked

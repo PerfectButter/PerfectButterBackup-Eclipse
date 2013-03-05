@@ -10,20 +10,31 @@ public final class R {
 	public static final class id {
 		public static final int afc_context_menu_view_listview_menu = 0x7f0b0001;
 		public static final int afc_filechooser_activity_view_locations = 0x7f0b0007;
+<<<<<<< HEAD
 		public static final int afc_filechooser_activity_menuitem_home = 0x7f0b0046;
 		public static final int afc_filechooser_activity_menugroup_view = 0x7f0b004a;
+=======
+		public static final int afc_filechooser_activity_menuitem_home = 0x7f0b0044;
+		public static final int afc_filechooser_activity_menugroup_view = 0x7f0b0048;
+>>>>>>> added reboot and check boxes default checked
 		public static final int afc_settings_sort_view_button_sort_by_size_desc = 0x7f0b0019;
 		public static final int afc_settings_sort_view_button_sort_by_date_desc = 0x7f0b001b;
 		public static final int afc_filechooser_activity_button_go_back = 0x7f0b0003;
 		public static final int afc_filechooser_activity_footer_view_divider = 0x7f0b000e;
 		public static final int afc_file_item_textview_filename = 0x7f0b0013;
 		public static final int afc_filechooser_activity_viewgroup_files = 0x7f0b000a;
+<<<<<<< HEAD
 		public static final int afc_filechooser_activity_menugroup_navigator = 0x7f0b0045;
 		public static final int afc_filechooser_activity_menuitem_reload = 0x7f0b0047;
+=======
+		public static final int afc_filechooser_activity_menugroup_navigator = 0x7f0b0043;
+		public static final int afc_filechooser_activity_menuitem_reload = 0x7f0b0045;
+>>>>>>> added reboot and check boxes default checked
 		public static final int afc_filechooser_activity_textview_full_dir_name = 0x7f0b0009;
 		public static final int afc_filechooser_activity_header_view_divider = 0x7f0b0008;
 		public static final int afc_file_item_imageview_icon = 0x7f0b0012;
 		public static final int afc_filechooser_activity_viewgroup_header = 0x7f0b0002;
+<<<<<<< HEAD
 		public static final int afc_filechooser_activity_menugroup_editor = 0x7f0b004c;
 		public static final int afc_settings_sort_view_button_sort_by_date_asc = 0x7f0b001a;
 		public static final int afc_filechooser_activity_view_files_footer_view = 0x7f0b000d;
@@ -33,6 +44,17 @@ public final class R {
 		public static final int afc_filechooser_activity_button_ok = 0x7f0b0011;
 		public static final int afc_filechooser_activity_button_go_forward = 0x7f0b0004;
 		public static final int afc_filechooser_activity_menugroup_sorter = 0x7f0b0048;
+=======
+		public static final int afc_filechooser_activity_menugroup_editor = 0x7f0b004a;
+		public static final int afc_settings_sort_view_button_sort_by_date_asc = 0x7f0b001a;
+		public static final int afc_filechooser_activity_view_files_footer_view = 0x7f0b000d;
+		public static final int afc_filechooser_activity_viewgroup_button_locations = 0x7f0b0005;
+		public static final int afc_filechooser_activity_menuitem_sort = 0x7f0b0047;
+		public static final int afc_settings_sort_view_button_sort_by_name_asc = 0x7f0b0016;
+		public static final int afc_filechooser_activity_button_ok = 0x7f0b0011;
+		public static final int afc_filechooser_activity_button_go_forward = 0x7f0b0004;
+		public static final int afc_filechooser_activity_menugroup_sorter = 0x7f0b0046;
+>>>>>>> added reboot and check boxes default checked
 		public static final int afc_settings_sort_view_button_sort_by_size_asc = 0x7f0b0018;
 		public static final int afc_simple_text_input_view_text1 = 0x7f0b001c;
 		public static final int afc_settings_sort_view_button_sort_by_name_desc = 0x7f0b0017;
@@ -40,8 +62,13 @@ public final class R {
 		public static final int afc_filechooser_activity_textview_saveas_filename = 0x7f0b0010;
 		public static final int afc_file_item_textview_file_info = 0x7f0b0014;
 		public static final int afc_file_item_checkbox_selection = 0x7f0b0015;
+<<<<<<< HEAD
 		public static final int afc_filechooser_activity_menuitem_switch_viewmode = 0x7f0b004b;
 		public static final int afc_filechooser_activity_menuitem_new_folder = 0x7f0b004d;
+=======
+		public static final int afc_filechooser_activity_menuitem_switch_viewmode = 0x7f0b0049;
+		public static final int afc_filechooser_activity_menuitem_new_folder = 0x7f0b004b;
+>>>>>>> added reboot and check boxes default checked
 		public static final int afc_filechooser_activity_view_locations_container = 0x7f0b0006;
 		public static final int afc_filechooser_activity_view_files_container = 0x7f0b000c;
 		public static final int afc_filechooser_activity_viewgroup_footer = 0x7f0b000f;

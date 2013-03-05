@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2"
+        android:checked="true"
         android:text="Battery Status Mod" />
 
     <CheckBox
@@ -71,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/checkBox1"
+        android:checked="true"
         android:text="Volume Manager" />
 
     <CheckBox
@@ -79,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/checkBox2"
+        android:checked="true"
         android:text="Custom Boot Animation" />
 
     <TextView
@@ -130,6 +133,7 @@
             android:onClick="onRadioButtonClicked"  />
     </RadioGroup>
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -139,5 +143,16 @@
         android:layout_marginTop="29dp"
         android:text="UI Options"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+=======
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="rebootPhone"
+        android:text="Restart Device" />
+>>>>>>> added reboot and check boxes default checked
 
 </RelativeLayout>
