@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -31,7 +32,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private static final int _ReqChooseFile = 0;
 	private final static String TAG = "TestActivity";
 	private String fileName = "";
-
+    private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -125,6 +126,55 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 	/*
+     * Listener for Kernel options
+     */
+    public void onKernelButtonClicked(View view) {
+      switch (view.getId()) {
+        case R.id.kernel_battery:
+          Log.i(TAG, "kernel battery option selected");
+          toastMessage("Battery Mode Enabled");
+          break;
+          
+        case R.id.kernel_stock:
+          Log.i(TAG,"kernel stock option selected");
+          toastMessage("Stock Mode Enabled");
+          break;
+          
+        case R.id.kernel_performance:
+          Log.i(TAG, "kernel performance option selected");
+          toastMessage("Performance Enabled ZOOM! ZOOOOOOM!");
+          break;
+      }
+    }
+
+	/*
+	 * Listener for Navigation Bar sizing
+	 */
+    public void onNavigationButtonClicked(View view) {
+
+      // Check which radio button was clicked
+      switch (view.getId()) {
+        case R.id.navigation_bar_small:
+            Log.i(TAG, "Small navigation selected");
+            toastMessage("Small navigation Selected");
+            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 30);
+            break;
+          
+          case R.id.navigation_bar_medium:
+            Log.i(TAG, "Medium navigation selected");
+            toastMessage("Medium Navigation selected");
+            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 50);
+            break;
+            
+          case R.id.navigation_bar_large:
+            Log.i(TAG, "Large navigation selected");
+            toastMessage("Large Navigation selected");
+            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 80);
+            break;
+      }
+    }
+
+	/*
 	 * The onclick listener for the reboot device button from the rom control fragment
 	 */
 	public void rebootDevice(View v)
@@ -167,34 +217,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
 		startActivityForResult(intent, _ReqChooseFile);
 	}
-	
-	public void onRadioButtonClicked(View view) {
-      // Is the button now checked?
-      boolean checked = ((RadioButton) view).isChecked();
-
-      // Check which radio button was clicked
-      switch (view.getId()) {
-        case R.id.navigation_bar_small:
-          if (checked) {
-            Log.i(TAG, "Small navigation selected");
-            toastMessage("Small navigation Selected");
-          }
-          break;
-          
-          case R.id.navigation_bar_medium:
-          if (checked) {
-            Log.i(TAG, "Medium navigation selected");
-            toastMessage("Medium Navigation selected");
-          }
-          case R.id.navigation_bar_large:
-          if (checked) {
-            Log.i(TAG, "Large navigation selected");
-            toastMessage("Large Navigation selected");
-          }
-          break;
-    
-      }
-  }
 	
 	
 	/**

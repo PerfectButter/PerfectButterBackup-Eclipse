@@ -3,6 +3,7 @@
     android:id="@+id/romcontrolfragmentlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
 
     <TextView
         android:id="@+id/textView1"
@@ -30,7 +31,7 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/kernel_small"
+            android:id="@+id/kernel_battery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -43,7 +44,7 @@
             android:text="Stock" />
 
         <RadioButton
-            android:id="@+id/kernel_large"
+            android:id="@+id/kernel_performance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Performance" />
@@ -114,23 +115,22 @@
             android:id="@+id/navigation_bar_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="Small" 
-            android:onClick="onRadioButtonClicked"  />
+            android:onClick="onNavigationButtonClicked"  />
 
         <RadioButton
             android:id="@+id/navigation_bar_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium" 
-            android:onClick="onRadioButtonClicked"  />
+            android:onClick="onNavigationButtonClicked"  />
 
         <RadioButton
             android:id="@+id/navigation_bar_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Large" 
-            android:onClick="onRadioButtonClicked"  />
+            android:onClick="onNavigationButtonClicked"  />
     </RadioGroup>
 
     <TextView

@@ -52,8 +52,8 @@ public final class R {
 		public static final int afc_button_navi_left = 0x7f090000;
 	}
 	public static final class integer {
-		public static final int afc_pkey_display_view_type_def = 0x7f070000;
 		public static final int afc_pkey_display_sort_type_def = 0x7f070001;
+		public static final int afc_pkey_display_view_type_def = 0x7f070000;
 	}
 	public static final class color {
 		public static final int afc_border_line_dark = 0x7f040000;
@@ -173,10 +173,10 @@ public final class R {
 		public static final int afc_ic_menu_gridview = 0x7f020011;
 	}
 	public static final class bool {
-		public static final int afc_pkey_display_sort_ascending_def = 0x7f080000;
-		public static final int afc_pkey_display_show_time_for_old_days_this_year_def = 0x7f080001;
-		public static final int afc_pkey_display_remember_last_location_def = 0x7f080003;
 		public static final int afc_pkey_display_show_time_for_old_days_def = 0x7f080002;
+		public static final int afc_pkey_display_show_time_for_old_days_this_year_def = 0x7f080001;
+		public static final int afc_pkey_display_sort_ascending_def = 0x7f080000;
+		public static final int afc_pkey_display_remember_last_location_def = 0x7f080003;
 	}
 	public static final class dimen {
 		public static final int afc_15dp = 0x7f050001;
