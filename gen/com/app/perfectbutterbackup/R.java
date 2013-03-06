@@ -82,27 +82,15 @@ public final class R {
         public static final int afc_filechooser_activity_button_ok=0x7f0b0011;
         public static final int afc_filechooser_activity_footer_view_divider=0x7f0b000e;
         public static final int afc_filechooser_activity_header_view_divider=0x7f0b0008;
-<<<<<<< HEAD
-        public static final int afc_filechooser_activity_menugroup_editor=0x7f0b004c;
-        public static final int afc_filechooser_activity_menugroup_navigator=0x7f0b0045;
-        public static final int afc_filechooser_activity_menugroup_sorter=0x7f0b0048;
-        public static final int afc_filechooser_activity_menugroup_view=0x7f0b004a;
-        public static final int afc_filechooser_activity_menuitem_home=0x7f0b0046;
-        public static final int afc_filechooser_activity_menuitem_new_folder=0x7f0b004d;
-        public static final int afc_filechooser_activity_menuitem_reload=0x7f0b0047;
-        public static final int afc_filechooser_activity_menuitem_sort=0x7f0b0049;
-        public static final int afc_filechooser_activity_menuitem_switch_viewmode=0x7f0b004b;
-=======
-        public static final int afc_filechooser_activity_menugroup_editor=0x7f0b004a;
-        public static final int afc_filechooser_activity_menugroup_navigator=0x7f0b0043;
-        public static final int afc_filechooser_activity_menugroup_sorter=0x7f0b0046;
-        public static final int afc_filechooser_activity_menugroup_view=0x7f0b0048;
-        public static final int afc_filechooser_activity_menuitem_home=0x7f0b0044;
-        public static final int afc_filechooser_activity_menuitem_new_folder=0x7f0b004b;
-        public static final int afc_filechooser_activity_menuitem_reload=0x7f0b0045;
-        public static final int afc_filechooser_activity_menuitem_sort=0x7f0b0047;
-        public static final int afc_filechooser_activity_menuitem_switch_viewmode=0x7f0b0049;
->>>>>>> added reboot and check boxes default checked
+        public static final int afc_filechooser_activity_menugroup_editor=0x7f0b004d;
+        public static final int afc_filechooser_activity_menugroup_navigator=0x7f0b0046;
+        public static final int afc_filechooser_activity_menugroup_sorter=0x7f0b0049;
+        public static final int afc_filechooser_activity_menugroup_view=0x7f0b004b;
+        public static final int afc_filechooser_activity_menuitem_home=0x7f0b0047;
+        public static final int afc_filechooser_activity_menuitem_new_folder=0x7f0b004e;
+        public static final int afc_filechooser_activity_menuitem_reload=0x7f0b0048;
+        public static final int afc_filechooser_activity_menuitem_sort=0x7f0b004a;
+        public static final int afc_filechooser_activity_menuitem_switch_viewmode=0x7f0b004c;
         public static final int afc_filechooser_activity_textview_full_dir_name=0x7f0b0009;
         public static final int afc_filechooser_activity_textview_saveas_filename=0x7f0b0010;
         public static final int afc_filechooser_activity_view_files_container=0x7f0b000c;
@@ -137,23 +125,19 @@ public final class R {
         public static final int backupPhoneLogCheckBox=0x7f0b0022;
         public static final int backupTextMessagesCheckBox=0x7f0b0021;
         public static final int backuptabfragmentlayout=0x7f0b001e;
-        public static final int button1=0x7f0b0041;
+        public static final int button1=0x7f0b0044;
         public static final int checkBox1=0x7f0b003b;
         public static final int checkBox2=0x7f0b003c;
         public static final int checkBox3=0x7f0b003d;
-<<<<<<< HEAD
         public static final int kernel_large=0x7f0b0038;
         public static final int kernel_options=0x7f0b0035;
         public static final int kernel_small=0x7f0b0036;
         public static final int kernel_stock=0x7f0b0037;
-        public static final int menu_settings=0x7f0b0044;
+        public static final int menu_settings=0x7f0b0045;
         public static final int navigation_bar=0x7f0b0040;
         public static final int navigation_bar_large=0x7f0b0043;
         public static final int navigation_bar_medium=0x7f0b0042;
         public static final int navigation_bar_small=0x7f0b0041;
-=======
-        public static final int menu_settings=0x7f0b0042;
->>>>>>> added reboot and check boxes default checked
         public static final int pager=0x7f0b0000;
         public static final int restoreTabChooseFileButton=0x7f0b0030;
         public static final int restoreTabFilePathTextBox=0x7f0b0031;

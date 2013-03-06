@@ -17,7 +17,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -29,13 +28,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-<<<<<<< HEAD
 import android.widget.EditText;
-=======
 import android.widget.RadioButton;
->>>>>>> Added on RadioButtonClicked listeners
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -323,7 +317,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return null;
 		}
 	}
-<<<<<<< HEAD
 
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
@@ -352,10 +345,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return textView;
 		}
 	}
-	
-	
-	
 }
-=======
-}
->>>>>>> added reboot and check boxes default checked

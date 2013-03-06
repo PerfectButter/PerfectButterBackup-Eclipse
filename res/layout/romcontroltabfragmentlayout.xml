@@ -133,7 +133,6 @@
             android:onClick="onRadioButtonClicked"  />
     </RadioGroup>
 
-<<<<<<< HEAD
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -143,7 +142,6 @@
         android:layout_marginTop="29dp"
         android:text="UI Options"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-=======
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -153,6 +151,4 @@
         android:layout_alignParentRight="true"
         android:onClick="rebootPhone"
         android:text="Restart Device" />
->>>>>>> added reboot and check boxes default checked
-
 </RelativeLayout>
