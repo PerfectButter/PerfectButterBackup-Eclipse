@@ -1,14 +1,11 @@
 package com.app.perfectbutterbackup;
 import group.pals.android.lib.ui.filechooser.FileChooserActivity;
 import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
-import group.pals.android.lib.ui.filechooser.services.IFileProvider;
-
-import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
@@ -23,22 +20,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
 {
 	private static final int _ReqChooseFile = 0;
-	private FragmentActivity fa;
 	private final static String TAG = "TestActivity";
+	private String fileName = "";
 
 
 	/**
@@ -59,7 +51,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		askRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -134,52 +125,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 	/*
-	 * Will prompt to ask for Root access so we can access system files
-	 * We can actually just run p = Runtime.getRuntime().exec("su");
-	 * This just toasts messages to test
+	 * The onclick listener for the reboot device button from the rom control fragment
 	 */
-	public void askRoot() 
-	{
-		Process p;
-		try {
-		   // Preform su to get root privledges
-		   p = Runtime.getRuntime().exec("su"); 
-	
-		   // Attempt to write a file to a root-only
-		   DataOutputStream os = new DataOutputStream(p.getOutputStream());
-		   os.writeBytes("echo \"Do I have root?\" >/sdcard/temporary.txt\n");
-	
-		   // Close the terminal
-		   os.writeBytes("exit\n");
-		   os.flush();
-		   try {
-		      p.waitFor();
-		           if (p.exitValue() != 255) {
-		        	  // TODO Code to run on success
-		              toastMessage("root");
-		           }
-		           else {
-		        	   // TODO Code to run on unsuccessful
-		        	   toastMessage("not root");
-		           }
-		   } catch (InterruptedException e) {
-		      // TODO Code to run in interrupted exception
-			   toastMessage("not root");
-		   }
-		} catch (IOException e) 
-		{
-		   // TODO Code to run in input/output exception
-			toastMessage("not root");
-		}
-	}
-	
-	
-	public void rebootPhone(View v)
+	public void rebootDevice(View v)
 	{
 		Builder userConfirmation = new AlertDialog.Builder(this);
         userConfirmation.setIcon(android.R.drawable.ic_dialog_alert);
-        userConfirmation.setTitle("Closing Activity");
-        userConfirmation.setMessage("Are you sure you want to close this activity?");
+        userConfirmation.setTitle("Confirm Reboot");
+        userConfirmation.setMessage("Are you sure you wish to reboot your device?");
         userConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
         	public void onClick(DialogInterface dialog, int which) 
@@ -210,21 +163,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public void launchFileChooser(View v)
 	{
-		final Activity currentActivity = this;
-
-		Intent intent = new Intent(currentActivity, FileChooserActivity.class);
-		/*
-		 * by default, if not specified, default rootpath is sdcard,
-		 * if sdcard is not available, "/" will be used
-		 */
+		Intent intent = new Intent(this, FileChooserActivity.class);
 		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
-		startActivityForResult(intent, _ReqChooseFile);	
-	    IFileProvider.FilterMode filterMode = (IFileProvider.FilterMode) intent.getSerializableExtra(FileChooserActivity._FilterMode);
-	    boolean saveDialog = intent.getBooleanExtra(FileChooserActivity._SaveDialog, false);
-	    List<LocalFile> files = (List<LocalFile>) intent.getSerializableExtra(FileChooserActivity._Results);
-	    System.out.println("hi");
-	    EditText editTextBox = (EditText) this.findViewById(R.id.restoreTabFilePathTextBox);
-	    editTextBox.setText(files.get(0).getAbsolutePath(), BufferType.SPANNABLE);
+		startActivityForResult(intent, _ReqChooseFile);
 	}
 	
 	public void onRadioButtonClicked(View view) {
@@ -317,32 +258,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return null;
 		}
 	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment 
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() 
-		{
-			// empty!
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-		{
-			// Create a new TextView and set its text to the fragment's section number argument value.
-			TextView textView = new TextView(getActivity());
-			textView.setGravity(Gravity.CENTER);
-			textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-			return textView;
-		}
+	    switch (requestCode) 
+	    {
+		    case _ReqChooseFile:
+		        if (resultCode == RESULT_OK) 
+		        {
+		            @SuppressWarnings("unchecked")
+					List<LocalFile> files = (List<LocalFile>) data.getSerializableExtra(FileChooserActivity._Results);
+		            for (File f : files)
+		            {
+		                System.out.println(f.getAbsolutePath());
+		                this.fileName = f.getAbsolutePath();
+		                EditText filePathTextBox = (EditText) findViewById(R.id.restoreTabFilePathTextBox);
+		                filePathTextBox.setText(this.fileName);
+		            }
+		        }
+		        break;
+	    }
 	}
 }

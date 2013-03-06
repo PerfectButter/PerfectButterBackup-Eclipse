@@ -6,39 +6,37 @@
     <string name="title_section2">Backup</string>
     <string name="title_section1">ROM Options</string>
     <string name="menu_settings">Settings</string>
-    
+
     <!-- Backup Tab Strings -->
 
-   		<string name="backup_tab_phone_header">Phone Data</string>
-			<string name="backup_tab_text_messages">Backup MMS</string>
-		    <string name="backup_tab_phone_log">Backup Phone Log</string>
-		    
-		<string name="backup_tab_app_header">Apps &amp; App Data</string>
-			<string name="backup_tab_apps">Backup Apps</string>
-    		<string name="backup_tab_app_data">Backup App Data</string>
-
-    	<string name="backup_tab_backup_location_header">Backup Location</string>
-		    <string name="backup_tab_email">Email</string>
-		    <string name="backup_tab_dropbox">Dropbox</string>
-		    <string name="backup_tab_sd_card">SD Card</string>
+    <string name="backup_tab_phone_header">Phone Data</string>
+    <string name="backup_tab_text_messages">Backup MMS</string>
+    <string name="backup_tab_phone_log">Backup Phone Log</string>
+    <string name="backup_tab_app_header">Apps &amp; App Data</string>
+    <string name="backup_tab_apps">Backup Apps</string>
+    <string name="backup_tab_app_data">Backup App Data</string>
+    <string name="backup_tab_backup_location_header">Backup Location</string>
+    <string name="backup_tab_email">Email</string>
+    <string name="backup_tab_dropbox">Dropbox</string>
+    <string name="backup_tab_sd_card">SD Card</string>
     <!-- end Backup Tab Strings -->
-    
-	<string name="backup_tab_run_backup">Run Backup!</string>
-		    
+
+    <string name="backup_tab_run_backup">Run Backup!</string>
+
     <!-- Restore Tab Strings -->
-	    <string name="restore_tab_header">Restore from file</string>
-	    <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup. Then touch \'Run restore\' to start the restore process.</string>
-		<string name="restore_tab_choose_file_button">Choose file</string>
-		<string name="restore_tab_run_restore_button">Run restore</string>
-	<!-- end Restore Tab Strings -->
-		
-	<!-- ROM Control Strings -->
-	
-	
-	
-	
-	
-	<!-- end ROM Control Strings -->
-	
-    
+    <string name="restore_tab_header">Restore from file</string>
+    <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup. Then touch \'Run restore\' to start the restore process.</string>
+    <string name="restore_tab_choose_file_button">Choose file</string>
+    <string name="restore_tab_run_restore_button">Run restore</string>
+    <!-- end Restore Tab Strings -->
+
+
+    <!-- ROM Control Strings -->
+
+
+    <!-- end ROM Control Strings -->
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_get_restore_file">GetRestoreFileActivity</string>
+
 </resources>

@@ -3,12 +3,11 @@
     package="com.app.perfectbutterbackup"
     android:versionCode="1"
     android:versionName="1.0" >
-    
-    <original-package android:name="com.app.perfectbutterbackup"  />
-    
+
+    <original-package android:name="com.app.perfectbutterbackup" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -28,24 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
+
         <!-- android file chooser -->
-        
+
         <activity
-    android:name="group.pals.android.lib.ui.filechooser.FileChooserActivity"
-    android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
-        <service android:name="group.pals.android.lib.ui.filechooser.services.LocalFileProvider"></service>
+            android:name="group.pals.android.lib.ui.filechooser.FileChooserActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
+
+        <service android:name="group.pals.android.lib.ui.filechooser.services.LocalFileProvider" >
+        </service>
         <!-- end android file chooser -->
-        
-        
-        
+
         <activity
             android:name="com.app.perfectbutterbackup.AppSettingsActivity"
-            android:label="app settings">
-            
+            android:label="app settings" >
         </activity>
-        
     </application>
 
 </manifest>

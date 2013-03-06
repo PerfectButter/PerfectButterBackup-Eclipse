@@ -168,12 +168,14 @@ public final class R {
         public static final int afc_view_locations_divider=0x7f03000a;
         public static final int appsettingsactivitylayout=0x7f03000b;
         public static final int backuptabfragmentlayout=0x7f03000c;
-        public static final int restoretabfragmentlayout=0x7f03000d;
-        public static final int romcontroltabfragmentlayout=0x7f03000e;
+        public static final int getrestorefileactivitylayout=0x7f03000d;
+        public static final int restoretabfragmentlayout=0x7f03000e;
+        public static final int romcontroltabfragmentlayout=0x7f03000f;
     }
     public static final class menu {
         public static final int activity_main=0x7f0a0000;
         public static final int afc_file_chooser_activity=0x7f0a0001;
+        public static final int getrestorefileactivitylayout=0x7f0a0002;
     }
     public static final class string {
         public static final int afc_cmd_advanced_selection_all=0x7f060008;
@@ -255,6 +257,11 @@ public final class R {
         public static final int backup_tab_run_backup=0x7f06004e;
         public static final int backup_tab_sd_card=0x7f06004d;
         public static final int backup_tab_text_messages=0x7f060045;
+        /**  end Restore Tab Strings 
+ ROM Control Strings 
+ end ROM Control Strings 
+         */
+        public static final int hello_world=0x7f060053;
         public static final int menu_settings=0x7f060043;
         public static final int restore_tab_choose_file_button=0x7f060051;
         /**  Restore Tab Strings 
@@ -262,6 +269,7 @@ public final class R {
         public static final int restore_tab_header=0x7f06004f;
         public static final int restore_tab_run_restore_button=0x7f060052;
         public static final int restore_tab_select_file_hint=0x7f060050;
+        public static final int title_activity_get_restore_file=0x7f060054;
         public static final int title_section1=0x7f060042;
         public static final int title_section2=0x7f060041;
         public static final int title_section3=0x7f060040;
