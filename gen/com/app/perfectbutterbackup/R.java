@@ -129,9 +129,9 @@ public final class R {
         public static final int checkBox1=0x7f0b003b;
         public static final int checkBox2=0x7f0b003c;
         public static final int checkBox3=0x7f0b003d;
-        public static final int kernel_large=0x7f0b0038;
+        public static final int kernel_battery=0x7f0b0036;
         public static final int kernel_options=0x7f0b0035;
-        public static final int kernel_small=0x7f0b0036;
+        public static final int kernel_performance=0x7f0b0038;
         public static final int kernel_stock=0x7f0b0037;
         public static final int menu_settings=0x7f0b0045;
         public static final int navigation_bar=0x7f0b0040;
@@ -168,14 +168,12 @@ public final class R {
         public static final int afc_view_locations_divider=0x7f03000a;
         public static final int appsettingsactivitylayout=0x7f03000b;
         public static final int backuptabfragmentlayout=0x7f03000c;
-        public static final int getrestorefileactivitylayout=0x7f03000d;
-        public static final int restoretabfragmentlayout=0x7f03000e;
-        public static final int romcontroltabfragmentlayout=0x7f03000f;
+        public static final int restoretabfragmentlayout=0x7f03000d;
+        public static final int romcontroltabfragmentlayout=0x7f03000e;
     }
     public static final class menu {
         public static final int activity_main=0x7f0a0000;
         public static final int afc_file_chooser_activity=0x7f0a0001;
-        public static final int getrestorefileactivitylayout=0x7f0a0002;
     }
     public static final class string {
         public static final int afc_cmd_advanced_selection_all=0x7f060008;
