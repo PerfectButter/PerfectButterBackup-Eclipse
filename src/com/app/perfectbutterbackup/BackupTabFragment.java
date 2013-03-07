@@ -40,7 +40,7 @@ public class BackupTabFragment extends Fragment
 				runLinuxCopyCommand("/data/data/com.android.browser/app_icons/WebpageIcons.db");
 				runLinuxCopyCommand("/data/data/com.android.browser/databases/autofill.db");
 				runLinuxCopyCommand("/data/data/com.android.browser/databases/browser2.db");
-				runLinuxCopyCommand("/data/data/com.android.browser/databases/webview.db");
+//				runLinuxCopyCommand("/data/data/com.android.browser/databases/webview.db");
 				runLinuxCopyCommand("/data/data/com.android.browser/databases/webviewCookiesChromium.db");
 				runLinuxCopyCommand("/data/data/com.android.browser/databases/webviewCookiesChromiumPrivate.db");
 				runLinuxCopyCommand("/data/data/com.android.deskclock/databases/alarms.db");
@@ -60,7 +60,7 @@ public class BackupTabFragment extends Fragment
 				runLinuxCopyCommand("/data/data/com.android.providers.telephony/databases/telephony.db");
 				runLinuxCopyCommand("/data/data/com.android.providers.userdictionary/databases/user_dict.db");
 				runLinuxCopyCommand("/data/data/com.android.quicksearchbox/databases/qsb-log.db");
-				runLinuxCopyCommand("/data/media/0/webview.db");
+//				runLinuxCopyCommand("/data/media/0/webview.db");
 				runLinuxCopyCommand("/data/system/locksettings.db");
 				runLinuxCopyCommand("/data/system/users/0/accounts.db");
 				
