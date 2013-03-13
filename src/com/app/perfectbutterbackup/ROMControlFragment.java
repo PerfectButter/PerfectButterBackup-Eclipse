@@ -29,5 +29,6 @@ public class ROMControlFragment extends Fragment
 	    View v = inflater.inflate(R.layout.romcontroltabfragmentlayout, container, false);
 	   	
 	    return v;
+	    
 	}
 }

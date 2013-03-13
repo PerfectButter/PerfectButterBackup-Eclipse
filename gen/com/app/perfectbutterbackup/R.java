@@ -125,9 +125,8 @@ public final class R {
         public static final int backupPhoneLogCheckBox=0x7f0b0022;
         public static final int backupTextMessagesCheckBox=0x7f0b0021;
         public static final int backuptabfragmentlayout=0x7f0b001e;
+        public static final int batterystatuscheckbox=0x7f0b003b;
         public static final int button1=0x7f0b0044;
-        public static final int checkBox1=0x7f0b003b;
-        public static final int checkBox2=0x7f0b003c;
         public static final int checkBox3=0x7f0b003d;
         public static final int kernel_battery=0x7f0b0036;
         public static final int kernel_options=0x7f0b0035;
@@ -149,6 +148,7 @@ public final class R {
         public static final int textView1=0x7f0b0034;
         public static final int textView2=0x7f0b003a;
         public static final int textView3=0x7f0b003e;
+        public static final int volumemanagercheckbox=0x7f0b003c;
     }
     public static final class integer {
         public static final int afc_pkey_display_sort_type_def=0x7f070001;

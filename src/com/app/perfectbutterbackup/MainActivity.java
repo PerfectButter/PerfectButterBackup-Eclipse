@@ -23,16 +23,24 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.widget.CompoundButton;
+
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
 {
 	private static final int _ReqChooseFile = 0;
 	private final static String TAG = "TestActivity";
 	private String fileName = "";
-    private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+	private CheckBox batteryStatus, volumeManager;
+
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -86,6 +94,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+		
+		
+		
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -121,14 +132,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		int duration = Toast.LENGTH_SHORT;
 
 		Toast toast = Toast.makeText(context, message, duration);
-		toast.show();
-		
+		toast.show();	
 	}
 	
 	/*
      * Listener for Kernel options
      */
-    public void onKernelButtonClicked(View view) {
+    public void onKernelRadioSelected(View view) {
       switch (view.getId()) {
         case R.id.kernel_battery:
           Log.i(TAG, "kernel battery option selected");
@@ -146,30 +156,53 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
           break;
       }
     }
+    
+    public void onBatteryStatusSelected(View view) {
+      
+      batteryStatus = (CheckBox)findViewById(R.id.batterystatuscheckbox);
+      if (((CheckBox) view).isChecked()) {
+        toastMessage("Battery Status Mod");
+      }
+        else {
+          toastMessage("Battery Status Stock");
+        }
+    }
+    
+    public void onVolumeManagerSelected(View view) {
+      
+      volumeManager = (CheckBox)findViewById(R.id.volumemanagercheckbox);
+      if(((CheckBox) view). isChecked()) {
+        toastMessage("Volume Manager mod enabled");
+      }
+      else {
+        toastMessage("Volume Manager mod Disabled");
+      }
+      
+    }
 
 	/*
 	 * Listener for Navigation Bar sizing
 	 */
-    public void onNavigationButtonClicked(View view) {
+    public void onNavigationRadioSelected(View view) {
 
       // Check which radio button was clicked
       switch (view.getId()) {
         case R.id.navigation_bar_small:
             Log.i(TAG, "Small navigation selected");
-            toastMessage("Small navigation Selected");
             Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 30);
+            toastMessage("Small navigation Selected");
             break;
           
           case R.id.navigation_bar_medium:
             Log.i(TAG, "Medium navigation selected");
-            toastMessage("Medium Navigation selected");
             Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 50);
+            toastMessage("Medium Navigation selected");
             break;
             
           case R.id.navigation_bar_large:
             Log.i(TAG, "Large navigation selected");
-            toastMessage("Large Navigation selected");
             Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 80);
+            toastMessage("Large Navigation selected");
             break;
       }
     }
