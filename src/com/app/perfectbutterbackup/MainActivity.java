@@ -1,6 +1,8 @@
 package com.app.perfectbutterbackup;
 import group.pals.android.lib.ui.filechooser.FileChooserActivity;
 import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
+
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +22,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -40,22 +43,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private String fileName = "";
 	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 	private static final String STATUS_BATTERY_ICON = "statusbar_battery_icon";
+	private static String PASSWORD = "";
 	private CheckBox batteryStatus, volumeManager;
-
-
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
 	ViewPager mViewPager;
 
 	@Override
@@ -63,22 +53,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
+		final ActionBar actionBar = getActionBar(); 		// Set up the action bar.
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		// Create the adapter that will return a fragment for each of the three primary sections of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager()); 		// Create the adapter that will return a fragment for each of the three primary sections of the app.
+		mViewPager = (ViewPager) findViewById(R.id.pager); 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
-		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() 
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() // When swiping between different sections, select the corresponding tab. We can also use ActionBar.Tab#select() to do this if we have a reference to the Tab.
 		{
 			@Override
 			public void onPageSelected(int position) 
@@ -87,54 +67,32 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			}
 		});
 
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
+		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) { 		// For each of the sections in the app, add a tab to the action bar.
+			// Create a tab with text corresponding to the page title defined by the adapter. Also specify this Activity object, which implements the TabListener interface, as the callback (listener) for when this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
-		
-		
-		
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_main, menu); 		// Inflate the menu; this adds items to the action bar if it is present.
 		return true;
 	}
 
 	
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) 
 	{
-		// When the given tab is selected, switch to the corresponding page in the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
+		mViewPager.setCurrentItem(tab.getPosition()); 		// When the given tab is selected, switch to the corresponding page in the ViewPager.
 	}
 
-	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) 
-	{
-		
-	}
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) { 	}
 
-	@Override
-	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) 
-	{
-		
-	}
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) { 	}
 	
 	/*
 	 * Method called to toast messages
 	 */
-	public void toastMessage(String message) {
-		Context context = getApplicationContext();
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, message, duration);
-		toast.show();	
-	}
+	public void toastMessage(String message) { Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();	}
 	
 	/*
      * Listener for Kernel options
@@ -183,78 +141,34 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       }
       
     }
-
+	
 	/*
 	 * Listener for Navigation Bar sizing
 	 */
-    public void onNavigationRadioSelected(View view) {
-
-      // Check which radio button was clicked
-      switch (view.getId()) {
-        case R.id.navigation_bar_small:
-            Log.i(TAG, "Small navigation selected");
-            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 30);
-            toastMessage("Small navigation Selected");
-            break;
-          
-          case R.id.navigation_bar_medium:
-            Log.i(TAG, "Medium navigation selected");
-            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 50);
-            toastMessage("Medium Navigation selected");
-            break;
-            
-          case R.id.navigation_bar_large:
-            Log.i(TAG, "Large navigation selected");
-            Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 80);
-            toastMessage("Large Navigation selected");
-            break;
-      }
-    }
-
-	/*
-	 * The onclick listener for the reboot device button from the rom control fragment
-	 */
-	public void rebootDevice(View v)
-	{
-		Builder userConfirmation = new AlertDialog.Builder(this);
-        userConfirmation.setIcon(android.R.drawable.ic_dialog_alert);
-        userConfirmation.setTitle("Confirm Reboot");
-        userConfirmation.setMessage("Are you sure you wish to reboot your device?");
-        userConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-        {
-        	public void onClick(DialogInterface dialog, int which) 
-        	{ 
-        		finish();
-    			try{
-    				Runtime.getRuntime().exec(new String[]{"/system/bin/su","-c","reboot now"});
-		  		}
-		  		catch (IOException e) {} 
-		  		
-		  		try{
-		  			  Runtime.getRuntime().exec(new String[]{"/system/xbin/su","-c","reboot now"});
-		  		}
-		  		catch (IOException e) {}
-  		
-		  		try{
-		  			  Runtime.getRuntime().exec(new String[]{"su","-c","reboot now"});
-		  		}
-		  		catch (IOException e) {}
-        	} });
-        userConfirmation.setNegativeButton("No", null);
-        userConfirmation.show();
+	public void onNavigationRadioSelected(View view) {
+	
+	  // Check which radio button was clicked
+	  switch (view.getId()) 
+	  {
+	    case R.id.navigation_bar_small:
+	        Log.i(TAG, "Small navigation selected");
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 30);
+	    toastMessage("Small navigation Selected");
+	    break;
+	  
+	  case R.id.navigation_bar_medium:
+	    Log.i(TAG, "Medium navigation selected");
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 50);
+	    toastMessage("Medium Navigation selected");
+	    break;
+	    
+	  case R.id.navigation_bar_large:
+	    Log.i(TAG, "Large navigation selected");
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 80);
+	    toastMessage("Large Navigation selected");
+	        break;
+	  }
 	}
-	
-	
-	/*
-	 * The onclick listener for the 'choose file' button in the restoretabfragmentlayout.xml
-	 */
-	public void launchFileChooser(View v)
-	{
-		Intent intent = new Intent(this, FileChooserActivity.class);
-		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
-		startActivityForResult(intent, _ReqChooseFile);
-	}
-	
 	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -267,11 +181,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			super(fm);
 		}
 
-		public Fragment getItem(int position) 
+		public Fragment getItem(int position) // getItem is called to instantiate the fragment for the given page.
 		{
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
 			if(position==1) // the 0th tab in array indexes, or 1st tab in human indexes
 			{
 				BackupTabFragment btf = new BackupTabFragment();
@@ -316,6 +227,140 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			}
 			return null;
 		}
+	}
+	
+	/*
+	 * The onclick listener for the reboot device button from the rom control fragment
+	 */
+	public void onRebootDevice(View v)
+	{
+		Builder userConfirmation = new AlertDialog.Builder(this);
+        userConfirmation.setIcon(android.R.drawable.ic_dialog_alert);
+        userConfirmation.setTitle("Confirm Reboot");
+        userConfirmation.setMessage("Are you sure you wish to reboot your device?");
+        userConfirmation.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+        	public void onClick(DialogInterface dialog, int which) 
+        	{ 
+        		finish();
+    			try{
+    				Runtime.getRuntime().exec(new String[]{"/system/bin/su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {} 
+		  		
+		  		try{
+		  			  Runtime.getRuntime().exec(new String[]{"/system/xbin/su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {}
+  		
+		  		try{
+		  			  Runtime.getRuntime().exec(new String[]{"su","-c","reboot now"});
+		  		}
+		  		catch (IOException e) {}
+        	} });
+        userConfirmation.setNegativeButton("No", null);
+        userConfirmation.show();
+	}
+	
+	public void onBootAnimationSelected(View view)
+    {
+    	android.widget.CheckBox checkBox = (android.widget.CheckBox) view;
+
+		String[] commands;  
+    	if(checkBox.isChecked())
+    		commands = new String[]{"mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system", "cp /system/media/customBootAnimation.zip /system/media/bootanimation.zip", "chmod 664 /system/media/bootanimation.zip"};
+    	else
+    		commands = new String[]{"mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system", "cp /system/media/stockBootAnimation.zip /system/media/bootanimation.zip", "chmod 664 /system/media/bootanimation.zip"};
+    	
+    	this.RunAsRoot(commands);
+    }
+	
+	
+	 public void RunAsRoot(String[] cmds)
+	 {
+		 try
+		 {
+	         Process p = Runtime.getRuntime().exec("/system/xbin/su");
+	         DataOutputStream os = new DataOutputStream(p.getOutputStream());            
+	         for (String tmpCmd : cmds) 
+	         {
+	             os.writeBytes(tmpCmd+"\n");
+	         }           
+	         os.writeBytes("exit\n");  
+	         os.flush();
+		 }
+		 catch (IOException e) { e.printStackTrace(); }
+	 }
+	
+	
+	/*
+	 * The onclick listener for the 'choose file' button in the restoretabfragmentlayout.xml
+	 */
+	public void launchFileChooser(View v)
+	{
+		Intent intent = new Intent(this, FileChooserActivity.class);
+		intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
+		startActivityForResult(intent, _ReqChooseFile);
+	}
+	
+	public void onRunBackupClicked(View v)
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Backup Password?");
+		alert.setMessage("Please enter a password for your backup");
+
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
+		{
+			public void onClick(DialogInterface dialog, int whichButton) 
+			{
+				  Editable value = input.getText();
+				  MainActivity.PASSWORD = value.toString();
+				  BackupTabFragment.runBackup(MainActivity.PASSWORD);
+			}});
+
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
+		{
+			  public void onClick(DialogInterface dialog, int whichButton) 
+			  {
+					MainActivity.PASSWORD = "";
+					BackupTabFragment.runBackup(MainActivity.PASSWORD);
+			  }
+		});
+
+		alert.show();
+	}
+	
+	public void onRestoreBackupClicked(View v)
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Restore Password?");
+		alert.setMessage("Please enter the password for the archived backup.");
+
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
+		{
+			public void onClick(DialogInterface dialog, int whichButton) 
+			{
+				  Editable value = input.getText();
+				  MainActivity.PASSWORD = value.toString();
+				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+			}});
+
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
+		{
+			  public void onClick(DialogInterface dialog, int whichButton) 
+			  {
+				  MainActivity.PASSWORD = "";
+				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+			  }
+		});
+
+		alert.show();
 	}
 	
 	@Override

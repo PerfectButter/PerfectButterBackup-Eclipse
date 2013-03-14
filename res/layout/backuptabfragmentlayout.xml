@@ -75,6 +75,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="onRunBackupClicked"
         android:text="@string/backup_tab_run_backup" />
 
     <TextView
@@ -105,26 +106,26 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<RadioGroup
-	    android:id="@+id/backupLocationRadioGroup"
-	    android:orientation="horizontal"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/backupLocationHeaderTextView" >
-
+		    android:id="@+id/backupLocationRadioGroup"
+		    android:orientation="horizontal"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@+id/backupLocationHeaderTextView" >
+	
 	    <RadioButton
 	        android:id="@+id/backupLocationEmailRadioButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/backup_tab_email" />
-
+	
 	    <RadioButton
 	        android:id="@+id/backupLocationSDCardRadioButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:checked="true"
 	        android:text="@string/backup_tab_sd_card" />
-
+	
 	    <RadioButton
 	        android:id="@+id/backupLocationDropboxRadioButton"
 	        android:layout_width="wrap_content"

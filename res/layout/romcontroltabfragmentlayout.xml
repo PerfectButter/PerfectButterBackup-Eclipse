@@ -84,6 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/volumemanagercheckbox"
+        android:onClick="onBootAnimationSelected"
         android:text="Custom Boot Animation" />
 
     <TextView
@@ -150,6 +151,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:onClick="rebootDevice"
+        android:onClick="onRebootDevice"
         android:text="Restart Device" />
 </RelativeLayout>

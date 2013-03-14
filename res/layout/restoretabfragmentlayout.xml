@@ -29,6 +29,7 @@
         android:layout_alignBaseline="@+id/restoreTabChooseFileButton"
         android:layout_alignBottom="@+id/restoreTabChooseFileButton"
         android:layout_alignParentRight="true"
+        android:onClick="onRestoreBackupClicked"
         android:text="@string/restore_tab_run_restore_button" />
 
     <EditText
