@@ -25,9 +25,12 @@
 
     <!-- Restore Tab Strings -->
     <string name="restore_tab_header">Restore from file</string>
-    <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup. Then touch \'Run restore\' to start the restore process.</string>
+    <!--  <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup. Then touch \'Run restore\' to start the restore process.</string> -->
+    <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup to restore.</string>
     <string name="restore_tab_choose_file_button">Choose file</string>
     <string name="restore_tab_run_restore_button">Run restore</string>
+    
+    
     <!-- end Restore Tab Strings -->
 
 

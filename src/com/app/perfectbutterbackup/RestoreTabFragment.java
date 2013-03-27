@@ -5,18 +5,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 public class RestoreTabFragment extends Fragment // for any functionality that's needed for the backup tab
 {	
 	public RestoreTabFragment() { } // every Fragment should have a blank constructor. Smashing Android UI page 265.
 	
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
-		return inflater.inflate(R.layout.restoretabfragmentlayout, container, false);
+		return  inflater.inflate(R.layout.restoretabfragmentlayout, container, false);
+		 
+		
+		
 	}
 	
 	public static void runRestore(String password)
 	{
+		
 		BackupTabFragment.runLinuxCopyCommand("/sdcard/perfectButterBackup/ApplicationCache.db","/data/data/com.android.browser/app_appcache/ApplicationCache.db");
 		BackupTabFragment.runLinuxCopyCommand("/sdcard/perfectButterBackup/Databases.db","/data/data/com.android.browser/app_databases/Databases.db");
 		BackupTabFragment.runLinuxCopyCommand("/sdcard/perfectButterBackup/CachedGeoposition.db","/data/data/com.android.browser/app_geolocation/CachedGeoposition.db");

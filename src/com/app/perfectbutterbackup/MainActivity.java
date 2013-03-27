@@ -377,8 +377,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		            {
 		                System.out.println(f.getAbsolutePath());
 		                this.fileName = f.getAbsolutePath();
-		                EditText filePathTextBox = (EditText) findViewById(R.id.restoreTabFilePathTextBox);
-		                filePathTextBox.setText(this.fileName);
+//		                EditText filePathTextBox = (EditText) findViewById(R.id.restoreTabFilePathTextBox);
+//		                filePathTextBox.setText(this.fileName);
 		            }
 		        }
 		        break;

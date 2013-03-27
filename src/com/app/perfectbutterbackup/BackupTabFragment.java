@@ -1,11 +1,15 @@
 package com.app.perfectbutterbackup;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 // for any functionality that's needed for the backup tab
 public class BackupTabFragment extends Fragment
@@ -14,16 +18,43 @@ public class BackupTabFragment extends Fragment
 	
 	public BackupTabFragment() { } 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
 	
+	static CheckBox callLogCheckBox; 
+	static CheckBox smsCheckBox;
+	static RadioButton sdcardRadioButton;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
 		// initialize busybox
 		BusyBox.installBusyBoxIfNecessary(container.getContext());
 		
-		return inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
+		View v = inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
+		callLogCheckBox = (CheckBox) v.findViewById(R.id.backupPhoneLogCheckBox);
+		 smsCheckBox = (CheckBox) v.findViewById(R.id.backupTextMessagesCheckBox);
+		 sdcardRadioButton = (RadioButton) v.findViewById(R.id.backupLocationSDCardRadioButton);
+		return v; 
 	}
 	
 	public static void runBackup(String password)
 	{
+		
+		ArrayList<String> filesToBackup = new ArrayList<String>();
+		if(sdcardRadioButton.isChecked())
+		{
+			
+		
+			if (callLogCheckBox.isChecked())
+			{
+				filesToBackup.add("/data/data/com.android.providers.telephony/databases/telephony.db");
+				filesToBackup.add("/data/data/com.android.providers.contacts/databases/contacts2.db");
+			}
+			
+			if(smsCheckBox.isChecked())
+			{
+				filesToBackup.add("/data/data/com.android.providers.telephony/databases/mmssms.db");
+			}
+		}
+		
+		
 //		// BACKUP TO MULTIPLE FILES
 //		runLinuxCopyCommand("/data/data/com.android.browser/app_appcache/ApplicationCache.db", destinationPath);
 //		runLinuxCopyCommand("/data/data/com.android.browser/app_databases/Databases.db", destinationPath);
@@ -54,7 +85,9 @@ public class BackupTabFragment extends Fragment
 //		runLinuxCopyCommand("/data/system/users/0/accounts.db", destinationPath);
 	
 
-		String[] filesToBackup = new String[] {
+		
+		/*
+		 {
 //		"/data/data/com.android.browser/app_appcache/ApplicationCache.db",
 //		"/data/data/com.android.browser/app_databases/Databases.db",
 //		"/data/data/com.android.browser/app_geolocation/CachedGeoposition.db",
@@ -63,7 +96,7 @@ public class BackupTabFragment extends Fragment
 //		"/data/data/com.android.browser/databases/browser2.db",
 //		"/data/data/com.android.browser/databases/webviewCookiesChromium.db",
 //		"/data/data/com.android.browser/databases/webviewCookiesChromiumPrivate.db",
-//		"/data/data/com.android.deskclock/databases/alarms.db",
+		"/data/data/com.android.deskclock/databases/alarms.db",
 //		"/data/data/com.android.email/databases/EmailProvider.db",
 //		"/data/data/com.android.email/databases/EmailProviderBackup.db",
 //		"/data/data/com.android.email/databases/EmailProviderBody.db",
@@ -83,6 +116,18 @@ public class BackupTabFragment extends Fragment
 //		"/data/system/locksettings.db",
 //		"/data/system/users/0/accounts.db",
 		};
+		*/
+		/*
+		if(Globals.sBackupMedia == BackupMedia.DROPBOX)
+		{
+			
+		}
+		else if(Globals.sBackupMedia == BackupMedia.EMAIL)
+		{
+			
+		}
+		*/
+		
 		
 		switch(Globals.sBackupMedia)
 		{
@@ -94,17 +139,17 @@ public class BackupTabFragment extends Fragment
 		
 		case MULTIPLE_FILE_ON_SDCARD:
 			BackupTabFragment.makeDirectoryInsdCard();
-			for(int i=0; i<filesToBackup.length; i++)
+			for(int i=0; i< filesToBackup.size() ; i++)
 			{
-				runLinuxCopyCommand(filesToBackup[i], destinationPath);
+				runLinuxCopyCommand(filesToBackup.get(i), destinationPath);
 			}
 			break;
 		
 		case TAR_FILE_ON_SDCARD:
 			String tarCommand = "tar -cf /sdcard/perfectButterBackup.tar";
-			for(int i=0; i<filesToBackup.length; i++)
+			for(int i=0; i<filesToBackup.size(); i++)
 			{
-				tarCommand += " " + filesToBackup[i];
+				tarCommand += " " + filesToBackup.get(i);
 			}
 			BusyBox.exec(tarCommand);
 			break;
