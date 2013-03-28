@@ -53,7 +53,7 @@ public class BusyBox {
 		}
 		// file.delete();
 	}
-
+	// to execute linux commands using busy box. 
 	public static void exec(String cmd) {
 		try {
 			String linuxCommand = "/system/xbin/su -c /system/xbin/busybox "

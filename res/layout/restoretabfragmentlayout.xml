@@ -11,83 +11,83 @@
     android:layout_height="match_parent" >
 
     <View
-	    android:id="@+id/backupPhoneHorizontalBar"
+	    android:id="@+id/restorePhoneHorizontalBar"
 	    android:layout_width="fill_parent"
 	    android:layout_height="2dip"
 	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/backupPhoneHeaderTextView"
+	    android:layout_below="@+id/restorePhoneHeaderTextView"
 	    android:background="#323232" />
 
     <View
-        android:id="@+id/backupAppHorizontalBar"
+        android:id="@+id/restoreAppHorizontalBar"
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backupAppHeaderTextView"
+        android:layout_below="@+id/restoreAppHeaderTextView"
         android:background="#323232" />
 
     <CheckBox
-        android:id="@+id/backupAppsCheckBox"
+        android:id="@+id/restoreAppsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backupAppHorizontalBar"
+        android:layout_below="@+id/restoreAppHorizontalBar"
         android:checked="true"
-        android:text="@string/backup_tab_apps" />
+        android:text="@string/restore_tab_apps" />
 
     <CheckBox
-        android:id="@+id/backupAppDataCheckBox"
+        android:id="@+id/restoreAppDataCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backupAppsCheckBox"
+        android:layout_below="@+id/restoreAppsCheckBox"
         android:checked="true"
-        android:text="@string/backup_tab_app_data" />
+        android:text="@string/restore_tab_app_data" />
 
     <View
-        android:id="@+id/backupLocationHorizontalBar"
+        android:id="@+id/restoreLocationHorizontalBar"
         android:layout_width="fill_parent"
         android:layout_height="2dip"
-        android:layout_alignBottom="@+id/backupLocationHeaderTextView"
+        android:layout_alignBottom="@+id/restoreLocationHeaderTextView"
         android:layout_alignParentLeft="true"
         android:background="#323232" />
 
 	<RadioGroup
-		    android:id="@+id/backupLocationRadioGroup"
+		    android:id="@+id/restoreLocationRadioGroup"
 		    android:orientation="horizontal"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentLeft="true"
-		    android:layout_below="@+id/backupLocationHeaderTextView" >
+		    android:layout_below="@+id/restoreLocationHeaderTextView" >
 	
 	    <RadioButton
-	        android:id="@+id/backupLocationEmailRadioButton"
+	        android:id="@+id/restoreLocationEmailRadioButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/backup_tab_email" />
+	        android:text="@string/restore_tab_email" />
 	
 	    <RadioButton
-	        android:id="@+id/backupLocationSDCardRadioButton"
+	        android:id="@+id/restoreLocationSDCardRadioButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:checked="true"
-	        android:text="@string/backup_tab_sd_card" />
+	        android:text="@string/restore_tab_sd_card" />
 	
 	    <RadioButton
-	        android:id="@+id/backupLocationDropboxRadioButton"
+	        android:id="@+id/restoreLocationDropboxRadioButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/backup_tab_dropbox" />
+	        android:text="@string/restore_tab_dropbox" />
 	</RadioGroup>
 
     <TextView
-        android:id="@+id/backupPhoneHeaderTextView"
+        android:id="@+id/restorePhoneHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
-        android:text="@string/backup_tab_phone_header"
+        android:text="@string/restore_tab_phone_header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -95,45 +95,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/backupPhoneLogCheckBox"
+        android:layout_alignRight="@+id/restorePhoneLogCheckBox"
         android:text="@string/restore_tab_header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <CheckBox
-        android:id="@+id/backupTextMessagesCheckBox"
+        android:id="@+id/restoreTextMessagesCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backupPhoneHorizontalBar"
+        android:layout_below="@+id/restorePhoneHorizontalBar"
         android:checked="true"
-        android:text="@string/backup_tab_text_messages" />
+        android:text="@string/restore_tab_text_messages" />
 
     <CheckBox
-        android:id="@+id/backupPhoneLogCheckBox"
+        android:id="@+id/restorePhoneLogCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/backupTextMessagesCheckBox"
+        android:layout_below="@+id/restoreTextMessagesCheckBox"
         android:checked="true"
-        android:text="@string/backup_tab_phone_log" />
+        android:text="@string/restore_tab_phone_log" />
 
     <TextView
-        android:id="@+id/backupAppHeaderTextView"
+        android:id="@+id/restoreAppHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/backupPhoneLogCheckBox"
-        android:layout_below="@+id/backupPhoneLogCheckBox"
+        android:layout_alignRight="@+id/restorePhoneLogCheckBox"
+        android:layout_below="@+id/restorePhoneLogCheckBox"
         android:layout_marginTop="14dp"
-        android:text="@string/backup_tab_app_header"
+        android:text="@string/restore_tab_app_header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/backupLocationHeaderTextView"
+        android:id="@+id/restoreLocationHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/backupAppHeaderTextView"
-        android:layout_below="@+id/backupAppDataCheckBox"
-        android:text="@string/backup_tab_backup_location_header"
+        android:layout_alignLeft="@+id/restoreAppHeaderTextView"
+        android:layout_below="@+id/restoreAppDataCheckBox"
+        android:text="@string/restore_tab_backup_location_header"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 <!--
     <EditText

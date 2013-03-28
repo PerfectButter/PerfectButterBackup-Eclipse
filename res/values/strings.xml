@@ -31,6 +31,20 @@
     <string name="restore_tab_run_restore_button">Run restore</string>
     
     
+    <!--  additional string for restore tab -->
+    <string name="restore_tab_phone_header">Phone Data</string>
+    <string name="restore_tab_text_messages">Restore MMS</string>
+    <string name="restore_tab_phone_log">Restore Phone Log</string>
+    <string name="restore_tab_app_header">Apps &amp; App Data</string>
+    <string name="restore_tab_apps">Restore Apps</string>
+    <string name="restore_tab_app_data">Restore App Data</string>
+    <string name="restore_tab_backup_location_header">Restore Location</string>
+    <string name="restore_tab_email">Email</string>
+    <string name="restore_tab_dropbox">Dropbox</string>
+    <string name="restore_tab_sd_card">SD Card</string>
+     
+    
+    
     <!-- end Restore Tab Strings -->
 
 
