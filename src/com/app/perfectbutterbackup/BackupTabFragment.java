@@ -10,17 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 // for any functionality that's needed for the backup tab
 public class BackupTabFragment extends Fragment
 {
 	public static String destinationPath = "/sdcard/perfectButterBackup/";
 	
-	public BackupTabFragment() { } 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
 	
+	public BackupTabFragment() { } 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
+
+	
+	// BACKUP LOCATION
+	static RadioButton sdcardRadioButton;
+	static RadioButton dropboxRadioButton;
+	static RadioButton emailRadioButton;
+
+	// BACKUP OPTIONS
 	static CheckBox callLogCheckBox; 
 	static CheckBox smsCheckBox;
-	static RadioButton sdcardRadioButton;
+	static CheckBox appsCheckBox;
+	static CheckBox appsDatgaCheckBox;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
@@ -28,135 +38,111 @@ public class BackupTabFragment extends Fragment
 		BusyBox.installBusyBoxIfNecessary(container.getContext());
 		
 		View v = inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
+		
+		// BACKUP LOCATION
+		sdcardRadioButton = (RadioButton) v.findViewById(R.id.backupLocationSDCardRadioButton);
+		dropboxRadioButton = (RadioButton) v.findViewById(R.id.backupLocationDropboxRadioButton);
+		emailRadioButton = (RadioButton) v.findViewById(R.id.backupLocationEmailRadioButton);
+		
+		// BACKUP OPTION
 		callLogCheckBox = (CheckBox) v.findViewById(R.id.backupPhoneLogCheckBox);
-		 smsCheckBox = (CheckBox) v.findViewById(R.id.backupTextMessagesCheckBox);
-		 sdcardRadioButton = (RadioButton) v.findViewById(R.id.backupLocationSDCardRadioButton);
+		smsCheckBox = (CheckBox) v.findViewById(R.id.backupTextMessagesCheckBox);
+		appsCheckBox = (CheckBox) v.findViewById(R.id.backupAppsCheckBox);
+		appsDatgaCheckBox = (CheckBox) v.findViewById(R.id.backupAppDataCheckBox);
+		 
 		return v; 
 	}
 	
 	public static void runBackup(String password)
 	{
 		
-		ArrayList<String> filesToBackup = new ArrayList<String>();
-		if(sdcardRadioButton.isChecked())
-		{
+		ArrayList<String> itemsToBackup = new ArrayList<String>();
+				
+		////////////////////////////////////////
+		// BACKUP LOCATION
+		if (sdcardRadioButton.isChecked()) {
+			Globals.sBackupMedia = BackupMedia.TAR_FILE_ON_SDCARD;
 			
-		
-			if (callLogCheckBox.isChecked())
-			{
-				filesToBackup.add("/data/data/com.android.providers.telephony/databases/telephony.db");
-				filesToBackup.add("/data/data/com.android.providers.contacts/databases/contacts2.db");
-			}
+		} else if (dropboxRadioButton.isChecked()) {
+			Globals.sBackupMedia = BackupMedia.DROPBOX;
 			
-			if(smsCheckBox.isChecked())
-			{
-				filesToBackup.add("/data/data/com.android.providers.telephony/databases/mmssms.db");
-			}
+		} else if (emailRadioButton.isChecked()) {
+			Globals.sBackupMedia = BackupMedia.EMAIL;
 		}
-		
-		
-//		// BACKUP TO MULTIPLE FILES
-//		runLinuxCopyCommand("/data/data/com.android.browser/app_appcache/ApplicationCache.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/app_databases/Databases.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/app_geolocation/CachedGeoposition.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/app_icons/WebpageIcons.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/databases/autofill.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/databases/browser2.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/databases/webviewCookiesChromium.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.browser/databases/webviewCookiesChromiumPrivate.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.deskclock/databases/alarms.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.email/databases/EmailProvider.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.email/databases/EmailProviderBackup.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.email/databases/EmailProviderBody.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.keychain/databases/grants.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.launcher/databases/launcher.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.calendar/databases/calendar.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.contacts/databases/contacts2.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.contacts/databases/profile.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.downloads/databases/downloads.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.media/databases/external.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.media/databases/internal.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.settings/databases/settings.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.telephony/databases/mmssms.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.telephony/databases/telephony.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.providers.userdictionary/databases/user_dict.db", destinationPath);
-//		runLinuxCopyCommand("/data/data/com.android.quicksearchbox/databases/qsb-log.db", destinationPath);
-//		runLinuxCopyCommand("/data/system/locksettings.db", destinationPath);
-//		runLinuxCopyCommand("/data/system/users/0/accounts.db", destinationPath);
-	
+		////////////////////////////////////////		
+			
 
-		
-		/*
-		 {
-//		"/data/data/com.android.browser/app_appcache/ApplicationCache.db",
-//		"/data/data/com.android.browser/app_databases/Databases.db",
-//		"/data/data/com.android.browser/app_geolocation/CachedGeoposition.db",
-//		"/data/data/com.android.browser/app_icons/WebpageIcons.db",
-//		"/data/data/com.android.browser/databases/autofill.db",
-//		"/data/data/com.android.browser/databases/browser2.db",
-//		"/data/data/com.android.browser/databases/webviewCookiesChromium.db",
-//		"/data/data/com.android.browser/databases/webviewCookiesChromiumPrivate.db",
-		"/data/data/com.android.deskclock/databases/alarms.db",
-//		"/data/data/com.android.email/databases/EmailProvider.db",
-//		"/data/data/com.android.email/databases/EmailProviderBackup.db",
-//		"/data/data/com.android.email/databases/EmailProviderBody.db",
-//		"/data/data/com.android.keychain/databases/grants.db",
-//		"/data/data/com.android.launcher/databases/launcher.db",
-//		"/data/data/com.android.providers.calendar/databases/calendar.db",
-		"/data/data/com.android.providers.contacts/databases/contacts2.db",
-		"/data/data/com.android.providers.contacts/databases/profile.db",
-//		"/data/data/com.android.providers.downloads/databases/downloads.db",
-//		"/data/data/com.android.providers.media/databases/external.db",
-//		"/data/data/com.android.providers.media/databases/internal.db",
-//		"/data/data/com.android.providers.settings/databases/settings.db",
-		"/data/data/com.android.providers.telephony/databases/mmssms.db",
-		"/data/data/com.android.providers.telephony/databases/telephony.db",
-//		"/data/data/com.android.providers.userdictionary/databases/user_dict.db",
-//		"/data/data/com.android.quicksearchbox/databases/qsb-log.db",
-//		"/data/system/locksettings.db",
-//		"/data/system/users/0/accounts.db",
-		};
-		*/
-		/*
-		if(Globals.sBackupMedia == BackupMedia.DROPBOX)
-		{
-			
+		////////////////////////////////////////
+		// DETERMINE ITEMS TO SAVE 
+		// BASED ON BACKUP OPTIONS
+		if (callLogCheckBox.isChecked()) {
+			itemsToBackup.add("/data/data/com.android.providers.telephony/databases/telephony.db");
+			itemsToBackup.add("/data/data/com.android.providers.contacts/databases/contacts2.db");
 		}
-		else if(Globals.sBackupMedia == BackupMedia.EMAIL)
-		{
-			
+		if (smsCheckBox.isChecked()) {
+			itemsToBackup.add("/data/data/com.android.providers.telephony/databases/mmssms.db");
 		}
-		*/
-		
+		if (appsCheckBox.isChecked()) {
+			itemsToBackup.add("/data/app");
+		}
+		if (appsDatgaCheckBox.isChecked()) {
+			// BACKUP EVERYTHING
+			itemsToBackup.clear();
+
+			// only a single "/data" is enogh to single every single file in the
+			// data directory. Do other individual ones are needed while we are 
+			// using this one
+			itemsToBackup.add("/data");
+		}
+		//////////////////////////////////////////
+			
+
 		
 		switch(Globals.sBackupMedia)
 		{
-		case DROPBOX:
-			throw new RuntimeException("Dropbox not implemented yet");
-			
-		case EMAIL:
-			throw new RuntimeException("Dropbox not implemented yet");
 		
 		case MULTIPLE_FILE_ON_SDCARD:
 			BackupTabFragment.makeDirectoryInsdCard();
-			for(int i=0; i< filesToBackup.size() ; i++)
+			for(int i=0; i< itemsToBackup.size() ; i++)
 			{
-				runLinuxCopyCommand(filesToBackup.get(i), destinationPath);
+				runLinuxCopyCommand(itemsToBackup.get(i), destinationPath);
 			}
 			break;
 		
+
 		case TAR_FILE_ON_SDCARD:
+		case DROPBOX:	
+		case EMAIL:
+
+			/////////////////////////
+			// TAR UP ITEMS
 			String tarCommand = "tar -cf /sdcard/perfectButterBackup.tar";
-			for(int i=0; i<filesToBackup.size(); i++)
+			for(int i=0; i<itemsToBackup.size(); i++)
 			{
-				tarCommand += " " + filesToBackup.get(i);
+				tarCommand += " " + itemsToBackup.get(i);
 			}
 			BusyBox.exec(tarCommand);
+			
+			
+			if(Globals.sBackupMedia==BackupMedia.EMAIL) {
+				sendEmailWithFileAttachment("/sdcard/perfectButterBackup.tar");
+			}
+			if(Globals.sBackupMedia==BackupMedia.DROPBOX) {
+				saveToDropBox("/sdcard/perfectButterBackup.tar");
+			}
 			break;
 		
 		}
 	}
 	
+	private static void saveToDropBox(String string) {
+		// TODO: Implement this method
+	}
+
+	private static void sendEmailWithFileAttachment(String string) {
+		// TODO: Implement this method
+	}
+
 	public static void makeDirectoryInsdCard()
 	{
 		try{
