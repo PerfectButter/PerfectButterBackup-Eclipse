@@ -1,10 +1,15 @@
 package com.app.perfectbutterbackup;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +21,7 @@ import android.widget.Toast;
 public class BackupTabFragment extends Fragment
 {
 	public static String destinationPath = "/sdcard/perfectButterBackup/";
+	static Fragment sContext;
 	
 	
 	public BackupTabFragment() { } 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
@@ -34,6 +40,7 @@ public class BackupTabFragment extends Fragment
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
+		sContext = this;
 		// initialize busybox
 		BusyBox.installBusyBoxIfNecessary(container.getContext());
 		
@@ -135,12 +142,37 @@ public class BackupTabFragment extends Fragment
 		}
 	}
 	
-	private static void saveToDropBox(String string) {
-		// TODO: Implement this method
+	private static void saveToDropBox(String filename) {
+		File file = new File(filename);
+		if (!file.exists() || !file.canRead()) {
+		    //Toast.makeText(sContext, "Attachment Error", Toast.LENGTH_SHORT).show();
+		    return;
+		}
+		
+		// got dropbox example from this URL
+		// URL: https://forums.dropbox.com/topic.php?id=32222
+		
+		final Intent DBIntent = new Intent(android.content.Intent.ACTION_SEND);
+		DBIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+		DBIntent.setType("*/*");
+		DBIntent.setPackage("com.dropbox.android");
+		sContext.startActivity(DBIntent);
 	}
 
-	private static void sendEmailWithFileAttachment(String string) {
-		// TODO: Implement this method
+	private static void sendEmailWithFileAttachment(String filename) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"farooqnida@hotmail.com"});
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Perfect Butter Backup");
+		intent.putExtra(Intent.EXTRA_TEXT, "Hi,\n\nPlease find perfect butter backup file in the attachment.\n\nThanks\n\nPerfect Butter Team");
+		File file = new File(filename);
+		if (!file.exists() || !file.canRead()) {
+		    //Toast.makeText(sContext, "Attachment Error", Toast.LENGTH_SHORT).show();
+		    return;
+		}
+		Uri uri = Uri.parse("file://" + file);
+		intent.putExtra(Intent.EXTRA_STREAM, uri);
+		sContext.startActivity(Intent.createChooser(intent, "Send email..."));
 	}
 
 	public static void makeDirectoryInsdCard()
