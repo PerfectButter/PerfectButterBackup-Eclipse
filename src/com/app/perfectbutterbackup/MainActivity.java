@@ -43,6 +43,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private String fileName = "";
 	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 	private static final String STATUSBAR_BATTERY_ICON = "statusbar_battery_icon";
+	private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
 	private static String PASSWORD = "";
 	private CheckBox batteryStatus, volumeManager;
 	SectionsPagerAdapter mSectionsPagerAdapter;
@@ -145,10 +146,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       volumeManager = (CheckBox)findViewById(R.id.volumemanagercheckbox);
       if(((CheckBox) view). isChecked()) {
         toastMessage("Volume Manager mod enabled");
+        Settings.System.putInt(getContentResolver(), ENABLE_VOLUME_OPTIONS,1);
         
       }
       else {
         toastMessage("Volume Manager mod Disabled");
+        Settings.System.putInt(getContentResolver(), ENABLE_VOLUME_OPTIONS,0);
       }
       
     }
