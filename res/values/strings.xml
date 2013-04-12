@@ -49,6 +49,9 @@
 
 
     <!-- ROM Control Strings -->
+    <string name="navBarSmall">Small</string>
+    <string name="navBarMedium">Medium</string>
+    <string name="navBarLarge">Large</string>
 
 
     <!-- end ROM Control Strings -->
