@@ -1,14 +1,34 @@
 package com.app.perfectbutterbackup;
 
+
+
+import group.pals.android.lib.ui.filechooser.utils.FileUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class RestoreTabFragment extends Fragment // for any functionality that's needed for the backup tab
 {	
@@ -16,6 +36,8 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 	
 	public RestoreTabFragment() { } // every Fragment should have a blank constructor. Smashing Android UI page 265.
 
+	public  Handler h = new Handler(); 	
+	static Fragment sContext;
 	// RESTORE FROM
 	static RadioButton restoresdcardRadioButton;
 	static RadioButton restoreDropBoxRadioButton;
@@ -27,8 +49,11 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 	static CheckBox restoreAppsCheckBox;
 	static CheckBox restoreAppDataCheckBox;
 	
+	public static String dropboxFileDestinationPath = "/sdcard/perfectButterBackup.tar";
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
+		sContext = this;
 		View v = inflater.inflate(R.layout.restoretabfragmentlayout, container, false);
 		
 		// RESTORE FROM
@@ -43,6 +68,35 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		restoreAppsCheckBox       = (CheckBox)    v.findViewById(R.id.restoreAppsCheckBox);
 		
 		return v;
+		
+	}
+	
+	public int CheckWhichRadioButton()
+	{
+		int sdcard = 0;
+		int dropBox = 1;
+		int email = 2;
+		int nothing = 10;
+		
+		if(restoresdcardRadioButton.isChecked())
+		{
+			return sdcard;
+		}
+		
+		else if(restoreDropBoxRadioButton.isChecked())
+		{
+			return dropBox;
+		}
+		
+		else if(restoreEmailRadioButton.isChecked())
+		{
+			return email;
+		}
+		
+		else 
+		{
+			return nothing;
+		}
 		
 	}
 	
@@ -93,8 +147,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		
 		
 		switch (Globals.sBackupMedia) {
-		case DROPBOX:
-			throw new RuntimeException("Dropbox not implemented yet");
+		
 
 		case EMAIL:
 			throw new RuntimeException("Dropbox not implemented yet");
@@ -105,18 +158,128 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 						filesDestination.get(i));
 			}
 			break;
-
+		case DROPBOX:
 		case TAR_FILE_ON_SDCARD:
 			String tarCommand = "tar -x -C / -f /sdcard/perfectButterBackup.tar";
 			for (int i = 0; i < filesDestination.size(); i++) {
 				String file = filesDestination.get(i);
 				file = file.substring(1); // remove '/' from the begining
 				tarCommand += " " + file;
+				
 			}
 			BusyBox.exec(tarCommand);
+			// busybox  tar -x -C / -f /sdcard/perfectButterBackup.tar data/data/com.android.providers.telephony/databases/mmssms.db .....
 			break;
 
 		}
 		
+		 
+
+		
 	}
+	
+	private static final int FILE_SELECT_CODE = 0;
+
+    public static void showFileChooserFromDropBox() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
+        intent.setType("*/*"); 
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+        	Log.w("Nidha", "here 1");
+            sContext.startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Download"),
+                    FILE_SELECT_CODE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+        //    Toast.makeText(this, "Please install a File Manager.", 
+             //       Toast.LENGTH_SHORT).show();
+        }
+    }
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		Log.w("Nidha", "here 2");
+		switch (requestCode) {
+		case FILE_SELECT_CODE:
+			if (resultCode == Activity.RESULT_OK) {
+				// Get the Uri of the selected file
+				// result_ok means that user picked up the file
+				Uri uri = data.getData();
+				
+				Log.w("Nidha", "here 3");
+				ContentResolver cr = sContext.getActivity().getContentResolver();
+				try {
+					InputStream istream = cr.openInputStream(uri);
+					File f = new File(dropboxFileDestinationPath);
+					OutputStream out = new FileOutputStream(f);
+					byte buf[]=new byte[1024];
+					int len;
+					 while((len = istream.read(buf))>0)
+					 {
+						 out.write(buf,0,len);
+						 
+					 }
+					 //String fileName = f.getAbsolutePath();
+					 out.close();
+					 istream.close();
+					 
+					 Log.w("RestoreNida", "the stream are closed");
+					 //BackupTabFragment.runLinuxCopyCommand(fileName, dropboxFileDestinationPath);
+					 //System.out.println("now the file from dropbox is saved to sdcard");
+					 askForPassword(sContext.getActivity());
+
+					// TODO: read from istream & produce "/sdcard/perfectButterBackup.tar"
+					// example available at
+					// http://www.roseindia.net/java/java-conversion/InputstreamToFile.shtml
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+				
+				
+				
+			}
+			
+			
+			break;
+		}
+
+		super.onActivityResult(requestCode, resultCode, data);
+	}   
+	
+	public void askForPassword(Activity activity)
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+		alert.setTitle("Restore Password?");
+		alert.setMessage("Please enter the password for the archived backup.");
+
+		final EditText input = new EditText(activity);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
+		{
+			public void onClick(DialogInterface dialog, int whichButton) 
+			{
+				  Editable value = input.getText();
+				  MainActivity.PASSWORD = value.toString();
+				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+			}});
+
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
+		{
+			  public void onClick(DialogInterface dialog, int whichButton) 
+			  {
+				  MainActivity.PASSWORD = "";
+				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+			  }
+		});
+
+		alert.show();
+	}
+    
+    
 }

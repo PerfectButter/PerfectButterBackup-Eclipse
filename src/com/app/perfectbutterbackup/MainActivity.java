@@ -43,7 +43,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private String fileName = "";
 	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 	private static final String STATUS_BATTERY_ICON = "statusbar_battery_icon";
-	private static String PASSWORD = "";
+	static String PASSWORD = "";
 	private CheckBox batteryStatus, volumeManager;
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -335,6 +335,39 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	
 	public void onRestoreBackupClicked(View v)
 	{
+		/*
+		 * int sdcard = 0;
+		int dropBox = 1;
+		int email = 2;
+		int nothing = 10;
+		 */
+	RestoreTabFragment toCheck = new RestoreTabFragment();
+	
+	 int checkNumber = toCheck.CheckWhichRadioButton();
+	 if(checkNumber == 0)
+	 {
+		 // save from sdcard;
+		 toCheck.askForPassword(this);
+		//RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+		 
+	 }
+	 if(checkNumber == 1)
+	 {
+		 toCheck.showFileChooserFromDropBox();
+	 }
+	 
+	 if(checkNumber == 2)
+	 {
+		 //restore from email 
+	 }
+	 
+	 if(checkNumber == 10)
+	 {
+		 //throw error message saying but it shldnt reach this point
+	 }
+	 
+	/*
+	 * 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle("Restore Password?");
 		alert.setMessage("Please enter the password for the archived backup.");
@@ -361,11 +394,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		});
 
 		alert.show();
+		
+		*/
 	}
+	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
+		super.onActivityResult(requestCode,  resultCode,  data);
+		
 	    switch (requestCode) 
 	    {
 		    case _ReqChooseFile:
@@ -384,4 +422,5 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		        break;
 	    }
 	}
+	
 }
