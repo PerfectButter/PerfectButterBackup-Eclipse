@@ -376,7 +376,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 
 	 if(checkNumber == 2)
 	 {
-		 //restore from email 
+		 RestoreTabFragment.showFileChooserFromFileSystem();
 	 }
 	 
 	 if(checkNumber == 10)
