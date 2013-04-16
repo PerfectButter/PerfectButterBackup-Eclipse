@@ -107,28 +107,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	     toastMessage("not root");
 	  }
 	}
-	/*
-     * Listener for Kernel options
-     */
-    public void onKernelRadioSelected(View view) {
-      switch (view.getId()) {
-        case R.id.kernel_battery:
-          Log.i(TAG, "kernel battery option selected");
-          toastMessage("Battery Mode Enabled");
-          break;
-          
-        case R.id.kernel_stock:
-          Log.i(TAG,"kernel stock option selected");
-          toastMessage("Stock Mode Enabled");
-          break;
-          
-        case R.id.kernel_performance:
-          Log.i(TAG, "kernel performance option selected");
-          toastMessage("Performance Enabled ZOOM! ZOOOOOOM!");
-          break;
-      }
-    }
-    
+	
     public void onBatteryStatusSelected(View view) {
       
       batteryStatus = (CheckBox)findViewById(R.id.batterystatuscheckbox);

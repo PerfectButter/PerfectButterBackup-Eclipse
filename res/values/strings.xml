@@ -49,6 +49,16 @@
 
 
     <!-- ROM Control Strings -->
+    <string name="navBarTitle">Navigation Bar Size</string>
+    <string name="navBarSmall">Small</string>
+    <string name="navBarMedium">Medium</string>
+    <string name="navBarLarge">Large</string>
+    <string name="batteryStatus">Battery Status Mod</string>
+    <string name="volumeManager">Volume Manager Mod</string>
+    <string name="bootAnimation">Custom Boot Animation Mod</string>
+    <string name="uiOptionsTitle">UI Options</string>
+    <string name="restart">Restart Device</string>
+    
 
 
     <!-- end ROM Control Strings -->
