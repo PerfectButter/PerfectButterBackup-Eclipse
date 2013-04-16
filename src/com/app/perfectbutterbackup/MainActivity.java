@@ -44,6 +44,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 	private static final String STATUS_BATTERY_ICON = "statusbar_battery_icon";
 	static String PASSWORD = "";
+	private static final String STATUSBAR_BATTERY_ICON = "statusbar_battery_icon";
+	private static final String ENABLE_VOLUME_OPTIONS = "enable_volume_options";
 	private CheckBox batteryStatus, volumeManager;
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -51,6 +53,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
+	    requestRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final ActionBar actionBar = getActionBar(); 		// Set up the action bar.
@@ -94,6 +97,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public void toastMessage(String message) { Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();	}
 	
+	public void requestRoot() {
+	  Process p;  
+	  try {  
+	     // Preform su to get root privledges  
+	     p = Runtime.getRuntime().exec("su");
+	  } catch (IOException e) {  
+	    // TODO Code to run in input/output exception  
+	     toastMessage("not root");
+	  }
+	}
 	/*
      * Listener for Kernel options
      */
@@ -121,11 +134,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       batteryStatus = (CheckBox)findViewById(R.id.batterystatuscheckbox);
       if (((CheckBox) view).isChecked()) {
         toastMessage("Battery Status Mod Enabled");
-        Settings.System.putInt(getContentResolver(), STATUS_BATTERY_ICON,4);
+        Settings.System.putInt(getContentResolver(), STATUSBAR_BATTERY_ICON,4);
         }
       else {
         toastMessage("Battery Status Stock");
-        Settings.System.putInt(getContentResolver(), STATUS_BATTERY_ICON, 0);
+        Settings.System.putInt(getContentResolver(), STATUSBAR_BATTERY_ICON, 0);
         }
     }
     
@@ -134,10 +147,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       volumeManager = (CheckBox)findViewById(R.id.volumemanagercheckbox);
       if(((CheckBox) view). isChecked()) {
         toastMessage("Volume Manager mod enabled");
+        Settings.System.putInt(getContentResolver(), ENABLE_VOLUME_OPTIONS,1);
         
       }
       else {
         toastMessage("Volume Manager mod Disabled");
+        Settings.System.putInt(getContentResolver(), ENABLE_VOLUME_OPTIONS,0);
       }
       
     }
@@ -152,19 +167,22 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	  {
 	    case R.id.navigation_bar_small:
 	        Log.i(TAG, "Small navigation selected");
-	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 30);
+	    int height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_24);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Small navigation Selected");
 	    break;
 	  
 	  case R.id.navigation_bar_medium:
 	    Log.i(TAG, "Medium navigation selected");
-	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 50);
+	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_36);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Medium Navigation selected");
 	    break;
 	    
 	  case R.id.navigation_bar_large:
 	    Log.i(TAG, "Large navigation selected");
-	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, 80);
+	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_48);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Large Navigation selected");
 	        break;
 	  }
