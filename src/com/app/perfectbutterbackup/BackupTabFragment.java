@@ -162,7 +162,7 @@ public class BackupTabFragment extends Fragment
 	private static void sendEmailWithFileAttachment(String filename) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"farooqnida@hotmail.com"});
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"nidha.farooq.ismail@hotmail.com"});
 		intent.putExtra(Intent.EXTRA_SUBJECT, "Perfect Butter Backup");
 		intent.putExtra(Intent.EXTRA_TEXT, "Hi,\n\nPlease find perfect butter backup file in the attachment.\n\nThanks\n\nPerfect Butter Team");
 		File file = new File(filename);
