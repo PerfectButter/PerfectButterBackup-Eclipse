@@ -14,6 +14,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
@@ -53,7 +54,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-	    requestRoot();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final ActionBar actionBar = getActionBar(); 		// Set up the action bar.
@@ -302,6 +302,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	
 	public void onRunBackupClicked(View v)
 	{
+	    BackupTabFragment.runBackup();
+	    /**
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle("Backup Password?");
 		alert.setMessage("Please enter a password for your backup");
@@ -328,7 +330,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		});
 
 		alert.show();
+		*/
 	}
+	
 	
 	public void onRestoreBackupClicked(View v)
 	{
@@ -418,6 +422,28 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		        }
 		        break;
 	    }
+	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+	    super.onResume();
+	}
+
+	private void save(final boolean isChecked) {
+	    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+	    SharedPreferences.Editor editor = sharedPreferences.edit();
+	    editor.putBoolean("check", isChecked);
+	    editor.commit();
+	}
+
+	private boolean load() { 
+	    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+	    return sharedPreferences.getBoolean("check", false);
 	}
 	
 }
