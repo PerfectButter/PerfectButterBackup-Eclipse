@@ -2,6 +2,8 @@ package com.app.perfectbutterbackup;
 
 
 
+import group.pals.android.lib.ui.filechooser.FileChooserActivity;
+import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
 import group.pals.android.lib.ui.filechooser.utils.FileUtils;
 
 import java.io.File;
@@ -10,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -21,6 +24,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -149,8 +153,8 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		switch (Globals.sBackupMedia) {
 		
 
-		case EMAIL:
-			throw new RuntimeException("Dropbox not implemented yet");
+		
+			
 		case MULTIPLE_FILE_ON_SDCARD:
 
 			for (int i = 0; i < filesToRestore.size(); i++) {
@@ -158,6 +162,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 						filesDestination.get(i));
 			}
 			break;
+		case EMAIL:	
 		case DROPBOX:
 		case TAR_FILE_ON_SDCARD:
 			String tarCommand = "tar -x -C / -f /sdcard/perfectButterBackup.tar";
@@ -178,7 +183,8 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		
 	}
 	
-	private static final int FILE_SELECT_CODE = 0;
+	private static final int DROPBOXFILE_SELECT_CODE = 0;
+	private static final int  FILESYSTEM_SELECT_CODE = 1;
 
     public static void showFileChooserFromDropBox() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
@@ -189,12 +195,19 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
         	Log.w("Nidha", "here 1");
             sContext.startActivityForResult(
                     Intent.createChooser(intent, "Select a File to Download"),
-                    FILE_SELECT_CODE);
+                    DROPBOXFILE_SELECT_CODE);
         } catch (android.content.ActivityNotFoundException ex) {
             // Potentially direct the user to the Market with a Dialog
         //    Toast.makeText(this, "Please install a File Manager.", 
              //       Toast.LENGTH_SHORT).show();
         }
+    }
+    
+    public static void showFileChooserFromFileSystem() {
+
+        Intent intent = new Intent(sContext.getActivity(), FileChooserActivity.class);
+        intent.putExtra(FileChooserActivity._Rootpath, (Parcelable) new LocalFile("/your/path"));
+        sContext.startActivityForResult(intent, FILESYSTEM_SELECT_CODE);
     }
 
 	@Override
@@ -202,7 +215,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		
 		Log.w("Nidha", "here 2");
 		switch (requestCode) {
-		case FILE_SELECT_CODE:
+		case DROPBOXFILE_SELECT_CODE:
 			if (resultCode == Activity.RESULT_OK) {
 				// Get the Uri of the selected file
 				// result_ok means that user picked up the file
@@ -246,6 +259,26 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 			
 			
 			break;
+			
+		case FILESYSTEM_SELECT_CODE:
+			if (resultCode == Activity.RESULT_OK) 
+            {
+                @SuppressWarnings("unchecked")
+                List<LocalFile> files = (List<LocalFile>) data.getSerializableExtra(FileChooserActivity._Results);
+                for (File f : files)
+                {
+                    System.out.println(f.getAbsolutePath());
+       //             this.fileName = f.getAbsolutePath();
+                    Log.w("Nidha", "here10 ");
+                	BackupTabFragment.runLinuxCopyCommand(f.getAbsolutePath(),
+                			dropboxFileDestinationPath);
+                	askForPassword(sContext.getActivity());
+                	
+                    
+                }
+            }
+            break;
+			
 		}
 
 		super.onActivityResult(requestCode, resultCode, data);
