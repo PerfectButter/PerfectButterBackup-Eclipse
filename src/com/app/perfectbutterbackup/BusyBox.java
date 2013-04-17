@@ -1,5 +1,6 @@
 package com.app.perfectbutterbackup;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,10 +57,13 @@ public class BusyBox {
 	// to execute linux commands using busy box. 
 	public static void exec(String cmd) {
 		try {
-			String linuxCommand = "/system/xbin/su -c /system/xbin/busybox "
-					+ cmd;
-			Log.v("BusyBox", linuxCommand);
-			Runtime.getRuntime().exec(linuxCommand);
+		  Process suProcess = Runtime.getRuntime().exec("su");
+		  DataOutputStream os = new DataOutputStream(suProcess.getOutputStream());
+		  os.writeBytes(cmd + "\n");
+		  os.flush();
+		  os.writeBytes("exit\n");
+		  os.flush();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
