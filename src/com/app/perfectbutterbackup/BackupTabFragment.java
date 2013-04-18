@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class BackupTabFragment extends Fragment
 {
 	public static String destinationPath = "/sdcard/perfectButterBackup/";
 	static Fragment sContext;
+	protected static String TAG = "BackupTabFragment";
 	
 	
 	public BackupTabFragment() { } 	// every Fragment should have a blank constructor. Smashing Android UI page 265.
@@ -43,7 +45,6 @@ public class BackupTabFragment extends Fragment
 		sContext = this;
 		// initialize busybox
 		BusyBox.installBusyBoxIfNecessary(container.getContext());
-		
 		View v = inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
 		
 		// BACKUP LOCATION
@@ -60,7 +61,7 @@ public class BackupTabFragment extends Fragment
 		return v; 
 	}
 	
-	public static void runBackup(String password)
+	public static void runBackup()
 	{
 		
 		ArrayList<String> itemsToBackup = new ArrayList<String>();
@@ -90,7 +91,7 @@ public class BackupTabFragment extends Fragment
 			itemsToBackup.add("/data/data/com.android.providers.telephony/databases/mmssms.db");
 		}
 		if (appsCheckBox.isChecked()) {
-			itemsToBackup.add("/data/app");
+			itemsToBackup.add("/data/app/");
 		}
 		if (appsDatgaCheckBox.isChecked()) {
 			// BACKUP EVERYTHING
@@ -99,7 +100,7 @@ public class BackupTabFragment extends Fragment
 			// only a single "/data" is enogh to single every single file in the
 			// data directory. Do other individual ones are needed while we are 
 			// using this one
-			itemsToBackup.add("/data");
+			itemsToBackup.add("/data/data/");
 		}
 		//////////////////////////////////////////
 			
@@ -123,10 +124,12 @@ public class BackupTabFragment extends Fragment
 
 			/////////////////////////
 			// TAR UP ITEMS
+		    
 			String tarCommand = "tar -cf /sdcard/perfectButterBackup.tar";
 			for(int i=0; i<itemsToBackup.size(); i++)
-			{
+			{    
 				tarCommand += " " + itemsToBackup.get(i);
+				Log.d(TAG, tarCommand);
 			}
 			BusyBox.exec(tarCommand);
 			

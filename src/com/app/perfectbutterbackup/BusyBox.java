@@ -1,5 +1,6 @@
 package com.app.perfectbutterbackup;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -70,5 +71,17 @@ public class BusyBox {
   			  Runtime.getRuntime().exec(new String[]{"su","-c",cmd});
   		}
   		catch (IOException e) {}
+
+//		try {
+//		  Process suProcess = Runtime.getRuntime().exec("su");
+//		  DataOutputStream os = new DataOutputStream(suProcess.getOutputStream());
+//		  os.writeBytes(cmd + "\n");
+//		  os.flush();
+//		  os.writeBytes("exit\n");
+//		  os.flush();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }
