@@ -104,7 +104,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		
 	}
 	
-	public static void runRestore(String password)
+	public static void runRestore()
 	{
 		ArrayList<String> filesToRestore = new ArrayList<String>();
 		ArrayList<String> filesDestination = new ArrayList<String>();
@@ -172,6 +172,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 				tarCommand += " " + file;
 				
 			}
+			
 			BusyBox.exec(tarCommand);
 			// busybox  tar -x -C / -f /sdcard/perfectButterBackup.tar data/data/com.android.providers.telephony/databases/mmssms.db .....
 			break;
@@ -241,8 +242,10 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 					 Log.w("RestoreNida", "the stream are closed");
 					 //BackupTabFragment.runLinuxCopyCommand(fileName, dropboxFileDestinationPath);
 					 //System.out.println("now the file from dropbox is saved to sdcard");
-					 askForPassword(sContext.getActivity());
-
+					// askForPassword(sContext.getActivity());  ( IF  RESTORE DOESNT WORK UNCOMMENT THIS LINE)
+					 runRestore();
+					 
+					 
 					// TODO: read from istream & produce "/sdcard/perfectButterBackup.tar"
 					// example available at
 					// http://www.roseindia.net/java/java-conversion/InputstreamToFile.shtml
@@ -270,10 +273,13 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
                     System.out.println(f.getAbsolutePath());
        //             this.fileName = f.getAbsolutePath();
                     Log.w("Nidha", "here10 ");
-                	BackupTabFragment.runLinuxCopyCommand(f.getAbsolutePath(),
-                			dropboxFileDestinationPath);
-                	askForPassword(sContext.getActivity());
-                	
+                    
+                    BusyBox.exec("rm " + dropboxFileDestinationPath);
+                    BusyBox.exec("mv " + f.getAbsolutePath() + " " + dropboxFileDestinationPath);
+//                	BackupTabFragment.runLinuxCopyCommand(f.getAbsolutePath(),
+//                			dropboxFileDestinationPath);
+                	//askForPassword(sContext.getActivity());
+                	runRestore();
                     
                 }
             }
@@ -299,7 +305,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 			{
 				  Editable value = input.getText();
 				  MainActivity.PASSWORD = value.toString();
-				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+//				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
 			}});
 
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
@@ -307,7 +313,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 			  public void onClick(DialogInterface dialog, int whichButton) 
 			  {
 				  MainActivity.PASSWORD = "";
-				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+	//			  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
 			  }
 		});
 

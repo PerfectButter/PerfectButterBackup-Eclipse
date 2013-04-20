@@ -348,8 +348,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 if(checkNumber == 0)
 	 {
 		 // save from sdcard;
-		 toCheck.askForPassword(this);
-		//RestoreTabFragment.runRestore(MainActivity.PASSWORD);
+		 //toCheck.askForPassword(this);
+		RestoreTabFragment.runRestore();
 		 
 	 }
 	 if(checkNumber == 1)
