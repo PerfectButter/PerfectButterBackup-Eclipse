@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,10 +41,13 @@ public class BackupTabFragment extends Fragment
 	static CheckBox smsCheckBox;
 	static CheckBox appsCheckBox;
 	static CheckBox appsDatgaCheckBox;
+	static Handler h;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
 		sContext = this;
+		h = new Handler();
+		
 		// initialize busybox
 		BusyBox.installBusyBoxIfNecessary(container.getContext());
 		View v = inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
@@ -131,7 +136,35 @@ public class BackupTabFragment extends Fragment
 				tarCommand += " " + itemsToBackup.get(i);
 				Log.d(TAG, tarCommand);
 			}
-			BusyBox.exec(tarCommand);
+
+			// show backup progress spinner
+			final ProgressDialog loader = new ProgressDialog(sContext.getActivity());
+			loader.setTitle("Perfect Butter");
+			loader.setMessage("Backup in progress");
+			loader.show();
+			
+			BusyBox.exec(tarCommand, new BusyBoxCallback() {
+				
+				@Override
+				public void onExecCompleted() {
+					// non looper thread call
+					//HERE2
+//					loader.dismiss();
+					h.post(new Runnable() {
+
+						@Override
+						public void run() {
+							// dismiss backup progress spinner
+							loader.dismiss();
+							
+						}
+						
+					});
+					
+				}
+			});
+			// looper thread call
+			//HERE1
 			
 			
 			if(Globals.sBackupMedia==BackupMedia.EMAIL) {
@@ -193,4 +226,9 @@ public class BackupTabFragment extends Fragment
 		}
 		catch (IOException e) { e.printStackTrace(); }
 	}	
+	
+	
+	
+	
 }
+
