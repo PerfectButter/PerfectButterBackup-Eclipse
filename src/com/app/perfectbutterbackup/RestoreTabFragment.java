@@ -18,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +41,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 	
 	public RestoreTabFragment() { } // every Fragment should have a blank constructor. Smashing Android UI page 265.
 
-	public  Handler h = new Handler(); 	
+	public static  Handler h; 	
 	static Fragment sContext;
 	// RESTORE FROM
 	static RadioButton restoresdcardRadioButton;
@@ -58,6 +59,7 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
 		sContext = this;
+		h = new Handler();
 		View v = inflater.inflate(R.layout.restoretabfragmentlayout, container, false);
 		
 		// RESTORE FROM
@@ -173,7 +175,34 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 				
 			}
 			
-			BusyBox.exec(tarCommand);
+			final ProgressDialog loader = new ProgressDialog(sContext.getActivity());
+			loader.setTitle("Perfect Butter");
+			loader.setMessage("Restore in progress");
+			loader.show();
+			
+			BusyBox.exec(tarCommand, new BusyBoxCallback() {
+				
+				@Override
+				public void onExecCompleted() {
+					// non looper thread call
+					//HERE2
+//					loader.dismiss();
+					h.post(new Runnable() {
+
+						@Override
+						public void run() {
+							// dismiss backup progress spinner
+							loader.dismiss();
+							
+						}
+						
+					});
+					
+				}
+			});
+
+			
+//			BusyBox.exec(tarCommand);
 			// busybox  tar -x -C / -f /sdcard/perfectButterBackup.tar data/data/com.android.providers.telephony/databases/mmssms.db .....
 			break;
 
