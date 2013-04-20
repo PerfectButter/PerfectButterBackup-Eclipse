@@ -213,10 +213,7 @@ public class BackupTabFragment extends Fragment
 
 	public static void makeDirectoryInsdCard()
 	{
-		try{
-			  Runtime.getRuntime().exec("/system/xbin/su -c mkdir /sdcard/perfectButterBackup");
-		}
-		catch (IOException e) { e.printStackTrace(); }
+		BusyBox.exec("mkdir /sdcard/perfectButterBackup");
 	}
 	
 	public static void runLinuxCopyCommand(String fileName, String destinationPath)
