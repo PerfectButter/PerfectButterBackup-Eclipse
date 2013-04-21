@@ -27,7 +27,6 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -310,41 +309,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onRunBackupClicked(View v)
 	{
 	    BackupTabFragment.runBackup();
-	    /**
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("Backup Password?");
-		alert.setMessage("Please enter a password for your backup");
-
-		final EditText input = new EditText(this);
-		alert.setView(input);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
-		{
-			public void onClick(DialogInterface dialog, int whichButton) 
-			{
-				  Editable value = input.getText();
-				  MainActivity.PASSWORD = value.toString();
-				  BackupTabFragment.runBackup(MainActivity.PASSWORD);
-			}});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
-		{
-			  public void onClick(DialogInterface dialog, int whichButton) 
-			  {
-					MainActivity.PASSWORD = "";
-					BackupTabFragment.runBackup(MainActivity.PASSWORD);
-			  }
-		});
-
-		alert.show();
-		*/
+	    
 	}
 	
 	
 	public void onRestoreBackupClicked(View v)
 	{
 		/*
-		 * int sdcard = 0;
+	 	int sdcard = 0;
 		int dropBox = 1;
 		int email = 2;
 		int nothing = 10;
@@ -355,13 +327,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 if(checkNumber == 0)
 	 {
 		 // save from sdcard;
-		 //toCheck.askForPassword(this);
 		RestoreTabFragment.runRestore();
 		 
 	 }
 	 if(checkNumber == 1)
 	 {
-		 toCheck.showFileChooserFromDropBox();
+		 RestoreTabFragment.showFileChooserFromDropBox();
 	 }
 	 
 	 if(checkNumber == 2)
@@ -374,36 +345,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		 //throw error message saying but it shldnt reach this point
 	 }
 	 
-	/*
-	 * 
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("Restore Password?");
-		alert.setMessage("Please enter the password for the archived backup.");
-
-		final EditText input = new EditText(this);
-		alert.setView(input);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
-		{
-			public void onClick(DialogInterface dialog, int whichButton) 
-			{
-				  Editable value = input.getText();
-				  MainActivity.PASSWORD = value.toString();
-				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
-			}});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
-		{
-			  public void onClick(DialogInterface dialog, int whichButton) 
-			  {
-				  MainActivity.PASSWORD = "";
-				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
-			  }
-		});
-
-		alert.show();
-		
-		*/
 	}
 	
 	

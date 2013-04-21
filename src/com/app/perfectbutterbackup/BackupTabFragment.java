@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,12 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 // for any functionality that's needed for the backup tab
 public class BackupTabFragment extends Fragment
 {
-	public static String destinationPath = "/sdcard/perfectButterBackup/";
+	public static final String destinationPath = "/sdcard/perfectButterBackup/";
 	static Fragment sContext;
 	protected static String TAG = "BackupTabFragment";
 	
@@ -48,8 +45,6 @@ public class BackupTabFragment extends Fragment
 		sContext = this;
 		h = new Handler();
 		
-		// initialize busybox
-		BusyBox.installBusyBoxIfNecessary(container.getContext());
 		View v = inflater.inflate(R.layout.backuptabfragmentlayout, container, false);
 		
 		// BACKUP LOCATION
@@ -99,12 +94,7 @@ public class BackupTabFragment extends Fragment
 			itemsToBackup.add("/data/app/");
 		}
 		if (appsDatgaCheckBox.isChecked()) {
-			// BACKUP EVERYTHING
-			itemsToBackup.clear();
-
-			// only a single "/data" is enogh to single every single file in the
-			// data directory. Do other individual ones are needed while we are 
-			// using this one
+		
 			itemsToBackup.add("/data/data/");
 		}
 		//////////////////////////////////////////
@@ -147,9 +137,7 @@ public class BackupTabFragment extends Fragment
 				
 				@Override
 				public void onExecCompleted() {
-					// non looper thread call
-					//HERE2
-//					loader.dismiss();
+					// non looper/UI thread call
 					h.post(new Runnable() {
 
 						@Override
@@ -164,8 +152,6 @@ public class BackupTabFragment extends Fragment
 				}
 			});
 			// looper thread call
-			//HERE1
-			
 			
 			if(Globals.sBackupMedia==BackupMedia.EMAIL) {
 				sendEmailWithFileAttachment("/sdcard/perfectButterBackup.tar");
@@ -181,12 +167,9 @@ public class BackupTabFragment extends Fragment
 	private static void saveToDropBox(String filename) {
 		File file = new File(filename);
 		if (!file.exists() || !file.canRead()) {
-		    //Toast.makeText(sContext, "Attachment Error", Toast.LENGTH_SHORT).show();
 		    return;
 		}
 		
-		// got dropbox example from this URL
-		// URL: https://forums.dropbox.com/topic.php?id=32222
 		
 		final Intent DBIntent = new Intent(android.content.Intent.ACTION_SEND);
 		DBIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -203,7 +186,6 @@ public class BackupTabFragment extends Fragment
 		intent.putExtra(Intent.EXTRA_TEXT, "Hi,\n\nPlease find perfect butter backup file in the attachment.\n\nThanks\n\nPerfect Butter Team");
 		File file = new File(filename);
 		if (!file.exists() || !file.canRead()) {
-		    //Toast.makeText(sContext, "Attachment Error", Toast.LENGTH_SHORT).show();
 		    return;
 		}
 		Uri uri = Uri.parse("file://" + file);

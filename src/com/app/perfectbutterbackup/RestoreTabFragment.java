@@ -4,18 +4,14 @@ package com.app.perfectbutterbackup;
 
 import group.pals.android.lib.ui.filechooser.FileChooserActivity;
 import group.pals.android.lib.ui.filechooser.io.localfile.LocalFile;
-import group.pals.android.lib.ui.filechooser.utils.FileUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -26,6 +22,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 public class RestoreTabFragment extends Fragment // for any functionality that's needed for the backup tab
 {	
@@ -195,31 +192,23 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 				@Override
 				public void onExecCompleted() {
 					// non looper thread call
-					//HERE2
-//					loader.dismiss();
+		//		loader.dismiss();
 					h.post(new Runnable() {
 
 						@Override
 						public void run() {
 							// dismiss backup progress spinner
 							loader.dismiss();
-							
 						}
 						
 					});
-					
 				}
 			});
 
-			
 //			BusyBox.exec(tarCommand);
 			// busybox  tar -x -C / -f /sdcard/perfectButterBackup.tar data/data/com.android.providers.telephony/databases/mmssms.db .....
 			break;
-
 		}
-		
-		 
-
 		
 	}
 	
@@ -237,9 +226,6 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
                     Intent.createChooser(intent, "Select a File to Download"),
                     DROPBOXFILE_SELECT_CODE);
         } catch (android.content.ActivityNotFoundException ex) {
-            // Potentially direct the user to the Market with a Dialog
-        //    Toast.makeText(this, "Please install a File Manager.", 
-             //       Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -279,23 +265,11 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 					 istream.close();
 					 
 					 Log.w("RestoreNida", "the stream are closed");
-					 //BackupTabFragment.runLinuxCopyCommand(fileName, dropboxFileDestinationPath);
-					 //System.out.println("now the file from dropbox is saved to sdcard");
-					// askForPassword(sContext.getActivity());  ( IF  RESTORE DOESNT WORK UNCOMMENT THIS LINE)
 					 runRestore();
-					 
-					 
-					// TODO: read from istream & produce "/sdcard/perfectButterBackup.tar"
-					// example available at
-					// http://www.roseindia.net/java/java-conversion/InputstreamToFile.shtml
-					
+					// TODO: read from istream & produce "/sdcard/perfectButterBackup.tar"					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				
-				
-				
 				
 			}
 			
@@ -317,7 +291,6 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
                     BusyBox.exec("mv " + f.getAbsolutePath() + " " + dropboxFileDestinationPath);
 //                	BackupTabFragment.runLinuxCopyCommand(f.getAbsolutePath(),
 //                			dropboxFileDestinationPath);
-                	//askForPassword(sContext.getActivity());
                 	runRestore();
                     
                 }
@@ -344,7 +317,6 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 			{
 				  Editable value = input.getText();
 				  MainActivity.PASSWORD = value.toString();
-//				  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
 			}});
 
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
@@ -352,7 +324,6 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 			  public void onClick(DialogInterface dialog, int whichButton) 
 			  {
 				  MainActivity.PASSWORD = "";
-	//			  RestoreTabFragment.runRestore(MainActivity.PASSWORD);
 			  }
 		});
 
