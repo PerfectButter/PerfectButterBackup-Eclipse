@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -23,18 +24,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Toast;
-import android.widget.CompoundButton;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener 
@@ -74,6 +69,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			// Create a tab with text corresponding to the page title defined by the adapter. Also specify this Activity object, which implements the TabListener interface, as the callback (listener) for when this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+		
+		/*
+		((Button) findViewById(R.id.restoreTabButtonRestart)).setOnClickListener(new Button.OnClickListener()
+        {
+			public void onClick(View argo)
+			{
+				onRebootDevice();
+				
+			}
+		});
+		*/
+        
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) 

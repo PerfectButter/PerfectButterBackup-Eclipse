@@ -151,16 +151,7 @@
     </EditText>
 -->
 
-    <Button
-        android:id="@+id/restoreTabRunRestoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:onClick="onRestoreBackupClicked"
-        android:text="@string/restore_tab_run_restore_button" />
-
+    <!--   
     <Button
         android:id="@+id/restoreTabChooseFileButton"
         android:layout_width="wrap_content"
@@ -169,6 +160,28 @@
         android:layout_alignParentLeft="true"
         android:onClick="launchFileChooser"
         android:text="@string/restore_tab_choose_file_button" />
+	-->
 
+    <Button
+        android:id="@+id/restoreTabRunRestoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/restoreLocationRadioGroup"
+        android:layout_marginTop="18dp"
+        android:onClick="onRestoreBackupClicked"
+        android:text="@string/restore_tab_run_restore_button" />
+
+    <Button
+        android:id="@+id/restoreTabButtonRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/restoreTabRunRestoreButton"
+        android:layout_marginTop="1dp"
+        android:text="@string/restore_tab_reboot_button" />
+	
 </RelativeLayout>
 <!-- </ScrollView> -->

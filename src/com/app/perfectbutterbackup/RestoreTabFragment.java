@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -73,6 +74,15 @@ public class RestoreTabFragment extends Fragment // for any functionality that's
 		restoreAppDataCheckBox    = (CheckBox)    v.findViewById(R.id.restoreAppDataCheckBox); 
 		restoreAppsCheckBox       = (CheckBox)    v.findViewById(R.id.restoreAppsCheckBox);
 		
+		((Button) (v.findViewById(R.id.restoreTabButtonRestart))).setOnClickListener(new Button.OnClickListener()
+        {
+			public void onClick(View argo)
+			{
+				MainActivity mainActivity = (MainActivity) sContext.getActivity();  
+				mainActivity.onRebootDevice(null);
+				
+			}
+		});
 		return v;
 		
 	}

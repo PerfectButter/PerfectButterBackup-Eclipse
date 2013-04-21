@@ -29,6 +29,7 @@
     <string name="restore_tab_select_file_hint">Touch \'Choose file\' to browse your local storage and locate the backup to restore.</string>
     <string name="restore_tab_choose_file_button">Choose file</string>
     <string name="restore_tab_run_restore_button">Run restore</string>
+    <string name="restore_tab_reboot_button">Reboot Device</string>
     
     
     <!--  additional string for restore tab -->
