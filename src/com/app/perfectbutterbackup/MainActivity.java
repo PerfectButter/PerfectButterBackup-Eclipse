@@ -68,18 +68,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			// Create a tab with text corresponding to the page title defined by the adapter. Also specify this Activity object, which implements the TabListener interface, as the callback (listener) for when this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
-		
-		/*
-		((Button) findViewById(R.id.restoreTabButtonRestart)).setOnClickListener(new Button.OnClickListener()
-        {
-			public void onClick(View argo)
-			{
-				onRebootDevice();
-				
-			}
-		});
-		*/
-        
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -103,17 +91,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public void toastMessage(String message) { Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();	}
 	
-	public void requestRoot() {
-	  Process p;  
-	  try {  
-	     // Preform su to get root privledges  
-	     p = Runtime.getRuntime().exec("su");
-	  } catch (IOException e) {  
-	    // TODO Code to run in input/output exception  
-	     toastMessage("not root");
-	  }
-	}
-	
+	/**
+	 * Change the Battery icon in notification bar
+	 * @param view is the current view
+	 */
     public void onBatteryStatusSelected(View view) {
       
       batteryStatus = (CheckBox)findViewById(R.id.batterystatuscheckbox);
@@ -127,6 +108,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
     }
     
+    /**
+     * Activate or disable the Volume Manager Modification
+     * @param view is the current view
+     */
     public void onVolumeManagerSelected(View view) {
       
       volumeManager = (CheckBox)findViewById(R.id.volumemanagercheckbox);
@@ -151,21 +136,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	  switch (view.getId()) 
 	  {
 	    case R.id.navigation_bar_small:
-	        Log.i(TAG, "Small navigation selected");
+	        Log.d(TAG, "Small navigation selected");
 	    int height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_24);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Small navigation Selected");
 	    break;
 	  
 	  case R.id.navigation_bar_medium:
-	    Log.i(TAG, "Medium navigation selected");
+	    Log.d(TAG, "Medium navigation selected");
 	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_36);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Medium Navigation selected");
 	    break;
 	    
 	  case R.id.navigation_bar_large:
-	    Log.i(TAG, "Large navigation selected");
+	    Log.d(TAG, "Large navigation selected");
 	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_48);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
 	    toastMessage("Large Navigation selected");
