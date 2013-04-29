@@ -144,7 +144,13 @@ public class BackupTabFragment extends Fragment
 						public void run() {
 							// dismiss backup progress spinner
 							loader.dismiss();
-							
+			
+							if(Globals.sBackupMedia==BackupMedia.EMAIL) {
+								sendEmailWithFileAttachment("/sdcard/perfectButterBackup.tar");
+							}
+							if(Globals.sBackupMedia==BackupMedia.DROPBOX) {
+								saveToDropBox("/sdcard/perfectButterBackup.tar");
+							}
 						}
 						
 					});
@@ -153,12 +159,7 @@ public class BackupTabFragment extends Fragment
 			});
 			// looper thread call
 			
-			if(Globals.sBackupMedia==BackupMedia.EMAIL) {
-				sendEmailWithFileAttachment("/sdcard/perfectButterBackup.tar");
-			}
-			if(Globals.sBackupMedia==BackupMedia.DROPBOX) {
-				saveToDropBox("/sdcard/perfectButterBackup.tar");
-			}
+			
 			break;
 		
 		}
