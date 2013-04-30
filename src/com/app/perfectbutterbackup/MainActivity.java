@@ -37,6 +37,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private final static String TAG = "TestActivity";
 	private String fileName = "";
 	private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+	private static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
+    private static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
 	private static final String STATUS_BATTERY_ICON = "statusbar_battery_icon";
 	static String PASSWORD = "";
 	private static final String STATUSBAR_BATTERY_ICON = "statusbar_battery_icon";
@@ -139,6 +141,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        Log.d(TAG, "Small navigation selected");
 	    int height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_24);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_WIDTH, height);
 	    toastMessage("Small navigation Selected");
 	    break;
 	  
@@ -146,6 +149,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    Log.d(TAG, "Medium navigation selected");
 	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_36);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_WIDTH, height);
 	    toastMessage("Medium Navigation selected");
 	    break;
 	    
@@ -153,6 +157,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    Log.d(TAG, "Large navigation selected");
 	    height = getResources().getDimensionPixelSize(R.dimen.navigation_bar_48);
 	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_HEIGHT, height);
+	    Settings.System.putInt(getContentResolver(), NAVIGATION_BAR_WIDTH, height);
 	    toastMessage("Large Navigation selected");
 	        break;
 	  }
